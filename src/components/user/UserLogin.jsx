@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { login } from "../../services/user/Login";
 import Cookies from "js-cookie";
 function UserLogin() {
@@ -7,16 +7,26 @@ function UserLogin() {
     e.preventDefault();
     login(email, password)
       .then((res) => {
-        console.log(res);
         Cookies.set("jwt", res.jwt);
+        setLoggoedIn(true);
       })
-      .catch((err) => console.log(err));
+      .catch(() => {
+        setLoggoedIn(false);
+      });
   };
 
-  const [email, setEmail] = useState("email");
-  const [password, setPassword] = useState("password");
+  const [email, setEmail] = useState(null);
+  const [password, setPassword] = useState(null);
+  const [loggedIn, setLoggoedIn] = useState(null);
+  const disableBtn =
+    password === null || password === "" || email === null || email === "";
+  const loggedInAlert = (
+    <div className="alert alert-danger" role="alert" style={{ marginTop: 15 }}>
+      Incorrect Email or password !
+    </div>
+  );
   const alertemail = (
-    <div class="alert alert-danger" role="alert">
+    <div className="alert alert-danger" role="alert">
       You should fill email field !
     </div>
   );
@@ -41,23 +51,28 @@ function UserLogin() {
               </a>
               <form>
                 <input
-                  type="email"
+                  type="text"
                   className="form-control"
                   placeholder="Email"
                   onChange={(e) => setEmail(e.target.value)}
                 />
-                {!email && alertemail}
+                {email === "" && alertemail}
                 <input
                   type="password"
                   className="form-control"
                   placeholder="Password"
                   onChange={(e) => setPassword(e.target.value)}
                 />
-                {!password && alertPassword}
+                {password === "" && alertPassword}
 
-                <button className="btn btn-login" onClick={userLogin}>
+                <button
+                  className="btn btn-login"
+                  onClick={userLogin}
+                  disabled={disableBtn}
+                >
                   Login
                 </button>
+                {loggedIn === false && loggedInAlert}
                 <span>
                   You Have No Account?
                   <Link to={"/user/register"}> Create An Account</Link>
@@ -70,6 +85,7 @@ function UserLogin() {
           </div>
         </section>
       </div>
+      {loggedIn && <Navigate to="/user/home" replace />}
     </div>
   );
 }
