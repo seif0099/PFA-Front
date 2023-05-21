@@ -145,7 +145,7 @@ function UserRegister() {
             <div className="login-screen">
               <a href="index-2.html">
                 <img
-                  src="../../assets/img/logo.png"
+                  src="/assets/img/logo.png"
                   className="img-responsive"
                   alt="logo"
                 />
