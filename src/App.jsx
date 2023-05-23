@@ -13,14 +13,11 @@ import CompanyHome from "./components/company/CompanyHome";
 import AdminLogin from "./components/admin/AdminLogin";
 import AdminRegister from "./components/admin/AdminRegister";
 import AdminForgetPassword from "./components/admin/AdminForgetPassword";
-import Home from "./components/shared/Home";
 import UserResetPass from "./components/user/UserResetPass";
 
 const App = () => (
   <BrowserRouter>
     <Routes>
-      <Route path="" element={<Home />} />
-
       <Route path="admin">
         <Route path="" element={<Navigate to="login" replace />} />
         <Route path="login" element={<AdminLogin />} />
