@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { resetPassword } from "../../services/user/ResetPass";
+import { resetPassword } from "../../services/company/ResetPass";
 import { Link } from "react-router-dom";
 
-const UserResetPass = () => {
+const CompanyResetPass = () => {
   const ResetPassword = (e) => {
     e.preventDefault();
     resetPassword(password)
@@ -66,11 +66,11 @@ const UserResetPass = () => {
                 {alertSuccess}
                 <span>
                   Have You Account?
-                  <Link to={"/user/login"}>Login</Link>
+                  <Link to={"/company/login"}>Login</Link>
                 </span>
                 <span>
                   You Have No Account?
-                  <Link to={"/user/register"}> Create An Account</Link>
+                  <Link to={"/company/register"}> Create An Account</Link>
                 </span>
               </div>
             </div>
@@ -152,11 +152,11 @@ const UserResetPass = () => {
               </form>
               <span>
                 Have You Account?
-                <Link to={"/user/login"}>Login</Link>
+                <Link to={"/company/login"}>Login</Link>
               </span>
               <span>
                 You Have No Account?
-                <Link to={"/user/register"}> Create An Account</Link>
+                <Link to={"/company/register"}> Create An Account</Link>
               </span>
             </div>
           </div>
@@ -166,4 +166,4 @@ const UserResetPass = () => {
   );
 };
 
-export default UserResetPass;
+export default CompanyResetPass;

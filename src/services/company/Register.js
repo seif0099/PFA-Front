@@ -8,41 +8,26 @@ export const register = (
   codeEntreprise,
   email,
   password,
-  adress,
-  confirmPass
+  adresse
 ) => {
   return new Promise((res, rej) => {
-    if (
-      email !== "" &&
-      password !== "" &&
-      description !== "" &&
-      telephone !== "" &&
-      siteWeb !== "" &&
-      codeEntreprise !== "" &&
-      password !== "" &&
-      adress !== "" &&
-      confirmPass!=="password"
-    ) {
       axios
         .post(`${baseURL}/companyRegister`, {
           nomEntreprise,
           description,
-          adress,
+          adresse,
           telephone,
           siteWeb,
           codeEntreprise,
           email,
-          password,
-          confirmPass,
+          password
         })
-        .then((response) => {
+        .then(response => {
           res(response.data);
         })
-        .catch((response) => {
-          rej(response);
+        .catch(err => {
+          rej(err);
         });
-    } else {
-      rej("empty field !");
     }
-  });
+  );
 };

@@ -11,7 +11,9 @@ const NotFound = () => {
               4<span>0</span>4
             </h2>
             <p>Oops...looks like we got lost</p>
-            <Link class="btn btn-success small-btn">Let's Go Home</Link>
+            <Link class="btn btn-success small-btn" to={"/"}>
+              Let's Go Home
+            </Link>
           </div>
         </div>
       </section>

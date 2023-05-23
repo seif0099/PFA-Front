@@ -1,35 +1,68 @@
-import Cookies from "js-cookie";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { register } from "../../services/company/Register";
 
 function CompanyRegister() {
-  const companyRegister = (e) => {
-  e.preventDefault();
-  register(companyName,description,phone,siteWeb,companyCode,email, password,address,confirmPass)
-    .then((res) => {
-      console.log(res);
-      Cookies.set("jwt", res.jwt);
-    })
-    .catch((err) => console.log(err));
-};
+  const Register = (e) => {
+    e.preventDefault();
+    register(
+      companyName,
+      description,
+      phone,
+      siteWeb,
+      companyCode,
+      email,
+      password,
+      address
+    )
+      .then((res) => {
+        setEndRegister(true);
+      })
+      .catch((err) => {
+        setErrMsg(err.response.data.message);
+        setEndRegister(false);
+      });
+  };
 
+  const [companyName, setCompanyName] = useState(null);
+  const [description, setDescription] = useState(null);
+  const [phone, setPhone] = useState(null);
+  const [siteWeb, setSiteWeb] = useState(null);
+  const [companyCode, setCompanyCode] = useState(null);
+  const [email, setEmail] = useState(null);
+  const [password, setPassword] = useState(null);
+  const [confirmPass, setConfirmPass] = useState(null);
+  const [address, setAddress] = useState(null);
+  const [endRegister, setEndRegister] = useState(null);
+  const [errMssg, setErrMsg] = useState(null);
 
+  const disableBtn =
+    companyName === null ||
+    companyName === "" ||
+    description === null ||
+    description === "" ||
+    phone === null ||
+    phone === "" ||
+    siteWeb === null ||
+    siteWeb === "" ||
+    companyCode === null ||
+    companyCode === "" ||
+    email === null ||
+    email === "" ||
+    password === null ||
+    password === "" ||
+    confirmPass === null ||
+    confirmPass === "" ||
+    address === null ||
+    address === "";
 
-const [companyName, setCompanyName] = useState("companyName");
-  const [description, setDescription] = useState("description");
-  const [phone, setPhone] = useState("phone");
-  const [siteWeb, setSiteWeb] = useState("siteWeb");
-  const [companyCode, setCompanyCode] = useState("companyCode");
-  const [email, setEmail] = useState("email");
-  const [password, setPassword] = useState("address");
-    const [confirmPass, setConfirmPass] = useState("confirmPass");
-  const [address, setAddress] = useState("address");
+  const alreadyExistAlert = (
+    <div className="alert alert-danger" role="alert" style={{ marginTop: 15 }}>
+      {`${errMssg} !`}
+    </div>
+  );
 
-
-
-
- const alertCompanyName = (
+  const alertCompanyName = (
     <div class="alert alert-danger" role="alert">
       You should fill the company name !
     </div>
@@ -55,32 +88,41 @@ const [companyName, setCompanyName] = useState("companyName");
       You should fill the company code field !
     </div>
   );
-    const alertEmail = (
+  const alertEmail = (
     <div class="alert alert-danger" role="alert">
       You should fill email field !
     </div>
-    );
-      const alertPassword = (
+  );
+  const alertPassword = (
     <div class="alert alert-danger" role="alert">
       You should fill email field !
     </div>
-      );
-        const alertAddress = (
-          <div class="alert alert-danger" role="alert">
-            You should fill address field !
-          </div>
-        );
-          const wrongConfirmPass = (
-            <div class="alert alert-danger" role="alert">
-              Password confirmation doesn't match
-            </div>
-          );
-           const alertConfirmPassword = (
-             <div class="alert alert-danger" role="alert">
-               You should fill confirm password field !
-             </div>
-           );
-  
+  );
+  const alertAddress = (
+    <div class="alert alert-danger" role="alert">
+      You should fill address field !
+    </div>
+  );
+  const wrongConfirmPass = (
+    <div class="alert alert-danger" role="alert">
+      Password confirmation doesn't match
+    </div>
+  );
+  const alertConfirmPassword = (
+    <div class="alert alert-danger" role="alert">
+      You should fill confirm password field !
+    </div>
+  );
+
+  const handlePhoneChange = (event) => {
+    const value = event.target.value;
+    if (!isNaN(value)) {
+      setPhone(value);
+    } else {
+      setPhone("");
+    }
+  };
+
   return (
     <div className="simple-bg-screen" style={{ minHeight: "100vh" }}>
       <div className="Loader"></div>
@@ -88,13 +130,13 @@ const [companyName, setCompanyName] = useState("companyName");
         <section className="login-screen-sec">
           <div className="container">
             <div className="login-screen">
-              <a href="index-2.html">
+              <Link to={"/"}>
                 <img
-                  src="../../assets/img/logo.png"
+                  src="/assets/img/logo.png"
                   className="img-responsive"
                   alt="logo"
                 />
-              </a>
+              </Link>
               <form>
                 <input
                   type="text"
@@ -102,14 +144,14 @@ const [companyName, setCompanyName] = useState("companyName");
                   placeholder="Company Name"
                   onChange={(e) => setCompanyName(e.target.value)}
                 />
-                {!companyName && alertCompanyName}
+                {companyName === "" && alertCompanyName}
                 <input
                   type="text"
                   className="form-control"
                   placeholder="Description"
                   onChange={(e) => setDescription(e.target.value)}
                 />
-                {!description && alertDescription}
+                {description === "" && alertDescription}
 
                 <input
                   type="email"
@@ -117,7 +159,7 @@ const [companyName, setCompanyName] = useState("companyName");
                   placeholder="E-mail"
                   onChange={(e) => setEmail(e.target.value)}
                 />
-                {!email && alertEmail}
+                {email === "" && alertEmail}
 
                 <input
                   type="password"
@@ -125,15 +167,15 @@ const [companyName, setCompanyName] = useState("companyName");
                   placeholder="Password"
                   onChange={(e) => setPassword(e.target.value)}
                 />
-                {!password && alertPassword}
+                {password === "" && alertPassword}
                 <input
                   type="password"
                   className="form-control"
                   placeholder="Confirm Password"
                   onChange={(e) => setConfirmPass(e.target.value)}
                 />
-                {!confirmPass && alertConfirmPassword}
-                {!confirmPass && password !== confirmPass && wrongConfirmPass}
+                {confirmPass === "" && alertConfirmPassword}
+                {confirmPass && password !== confirmPass && wrongConfirmPass}
 
                 <input
                   type="text"
@@ -141,7 +183,7 @@ const [companyName, setCompanyName] = useState("companyName");
                   placeholder="site web"
                   onChange={(e) => setSiteWeb(e.target.value)}
                 />
-                {!siteWeb && alertSiteWeb}
+                {siteWeb === "" && alertSiteWeb}
 
                 <input
                   type="text"
@@ -149,15 +191,16 @@ const [companyName, setCompanyName] = useState("companyName");
                   placeholder="Address"
                   onChange={(e) => setAddress(e.target.value)}
                 />
-                {!address && alertAddress}
+                {address === "" && alertAddress}
 
                 <input
                   type="text"
                   className="form-control"
                   placeholder="Phone"
-                  onChange={(e) => setPhone(e.target.value)}
+                  onChange={handlePhoneChange}
+                  value={phone}
                 />
-                {!phone && alertPhone}
+                {phone === "" && alertPhone}
 
                 <input
                   type="text"
@@ -165,33 +208,30 @@ const [companyName, setCompanyName] = useState("companyName");
                   placeholder="Company Code"
                   onChange={(e) => setCompanyCode(e.target.value)}
                 />
-                {!companyCode && alertCompanyCode}
+                {companyCode === "" && alertCompanyCode}
 
-                <button className="btn btn-login"
-                onClick={companyRegister}
+                <button
+                  className="btn btn-login"
+                  disabled={disableBtn}
+                  onClick={Register}
                 >
-                  
                   Register
-                
                 </button>
                 <span>
                   Have You Account?
                   <Link to={"/company/login"}>Login</Link>
                 </span>
                 <span>
-                  <Link to={"/user/forgetpass"}>Forget Password</Link>
+                  <Link to={"/company/forgetpass"}>Forget Password</Link>
                 </span>
               </form>
             </div>
           </div>
         </section>
       </div>
+      {endRegister === true && <Navigate to={"/company/login"} replace />}
     </div>
   );
 }
-
-
-
-
 
 export default CompanyRegister;

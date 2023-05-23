@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import { register } from "../../services/user/Register";
 function UserRegister() {
-  const [errMssg, setErrMsg] = useState(null);
   const Register = (e) => {
     e.preventDefault();
     register(
@@ -20,11 +19,9 @@ function UserRegister() {
     )
       .then((res) => {
         setEndRegister(true);
-        console.log(res);
       })
       .catch((err) => {
         setErrMsg(err.response.data.message);
-        console.log(errMssg);
         setEndRegister(false);
       });
   };
@@ -42,6 +39,7 @@ function UserRegister() {
   const [cv, setCv] = useState(null);
   const [cover, setCover] = useState(null);
   const [endRegister, setEndRegister] = useState(null);
+  const [errMssg, setErrMsg] = useState(null);
 
   const disableBtn =
     username === null ||
@@ -143,13 +141,13 @@ function UserRegister() {
         <section className="login-screen-sec">
           <div className="container">
             <div className="login-screen">
-              <a href="index-2.html">
+              <Link to={"/"}>
                 <img
                   src="/assets/img/logo.png"
                   className="img-responsive"
                   alt="logo"
                 />
-              </a>
+              </Link>
               <form>
                 <input
                   type="text"

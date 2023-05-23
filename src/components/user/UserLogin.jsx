@@ -20,6 +20,7 @@ function UserLogin() {
   const [loggedIn, setLoggoedIn] = useState(null);
   const disableBtn =
     password === null || password === "" || email === null || email === "";
+
   const loggedInAlert = (
     <div className="alert alert-danger" role="alert" style={{ marginTop: 15 }}>
       Incorrect Email or password !
@@ -42,13 +43,13 @@ function UserLogin() {
         <section className="login-screen-sec">
           <div className="container">
             <div className="login-screen">
-              <a href="index-2.html">
+              <Link to={"/"}>
                 <img
                   src="/assets/img/logo.png"
                   className="img-responsive"
                   alt="logo"
                 />
-              </a>
+              </Link>
               <form>
                 <input
                   type="text"

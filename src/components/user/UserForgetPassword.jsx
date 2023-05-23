@@ -37,13 +37,13 @@ function UserForgetPassword() {
           <section className="lost-ps-screen-sec">
             <div className="container">
               <div className="lost-ps-screen">
-                <a href="index-2.html">
+                <Link to={"/"}>
                   <img
                     src="/assets/img/logo.png"
                     className="img-responsive"
                     alt="logo"
                   />
-                </a>
+                </Link>
                 {alertSuccess}
                 <span>
                   Have You Account?
@@ -67,13 +67,13 @@ function UserForgetPassword() {
         <section className="lost-ps-screen-sec">
           <div className="container">
             <div className="lost-ps-screen">
-              <a href="index-2.html">
+              <Link to={"/"}>
                 <img
-                  src="../../assets/img/logo.png"
+                  src="/assets/img/logo.png"
                   className="img-responsive"
                   alt="logo"
                 />
-              </a>
+              </Link>
               <form>
                 <input
                   type="text"

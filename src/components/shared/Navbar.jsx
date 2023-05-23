@@ -1,5 +1,5 @@
-import React from 'react'
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
 
 function Navbar() {
   return (
@@ -15,14 +15,14 @@ function Navbar() {
             <i className="fa fa-bars"></i>
           </button>
           <div className="navbar-header">
-            <a className="navbar-brand" href="index-2.html">
+            <div className="navbar-brand" to={"/"}>
               <img
-                src="assets/img/logo-white.png"
+                src="/assets/img/logo-white.png"
                 className="logo logo-display"
                 alt=""
-                style={{ position: "relative", right: "140vh" }}
+                style={{ position: "relative", right: "136rem" }}
               />
-            </a>
+            </div>
           </div>
           <div className="collapse navbar-collapse" id="navbar-menu">
             <ul
@@ -38,20 +38,20 @@ function Navbar() {
               <li>
                 <Link
                   to={"/user"}
-                  style={{ right: "-138vh", top: "-6vh", color: "white" }}
+                  style={{ right: "-127rem", top: "-6rem", color: "white" }}
                   className="signin"
                 >
-                  <i class="bi bi-people-fill"></i>
+                  <i className="bi bi-people-fill"></i>
                   User
                 </Link>
               </li>
               <li>
                 <Link
                   to={"/company"}
-                  style={{ right: "-138vh", top: "-6vh", color: "white" }}
+                  style={{ right: "-127rem", top: "-6rem", color: "white" }}
                   className="signin"
                 >
-                  <i class="bi bi-briefcase-fill"></i>
+                  <i className="bi bi-briefcase-fill"></i>
                   Company
                 </Link>
               </li>
@@ -68,5 +68,4 @@ function Navbar() {
   );
 }
 
-
-export default Navbar
+export default Navbar;

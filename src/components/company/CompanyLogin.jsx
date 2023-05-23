@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { login } from "../../services/company/Login";
 import Cookies from "js-cookie";
 function CompanyLogin() {
@@ -7,14 +7,27 @@ function CompanyLogin() {
     e.preventDefault();
     login(email, password)
       .then((res) => {
-        console.log(res);
         Cookies.set("jwt", res.jwt);
+        setLoggoedIn(true);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        setLoggoedIn(false);
+      });
   };
 
-  const [email, setEmail] = useState("email");
-  const [password, setPassword] = useState("password");
+  const [email, setEmail] = useState(null);
+  const [password, setPassword] = useState(null);
+  const [loggedIn, setLoggoedIn] = useState(null);
+
+  const disableBtn =
+    password === null || password === "" || email === null || email === "";
+
+  const loggedInAlert = (
+    <div className="alert alert-danger" role="alert" style={{ marginTop: 15 }}>
+      Incorrect Email or password !
+    </div>
+  );
+
   const alertemail = (
     <div class="alert alert-danger" role="alert">
       You should fill email field !
@@ -32,13 +45,13 @@ function CompanyLogin() {
         <section className="login-screen-sec">
           <div className="container">
             <div className="login-screen">
-              <a href="index-2.html">
+              <Link to={"/"}>
                 <img
-                  src="../../assets/img/logo.png"
+                  src="/assets/img/logo.png"
                   className="img-responsive"
                   alt="logo"
                 />
-              </a>
+              </Link>
               <form>
                 <input
                   type="email"
@@ -46,18 +59,23 @@ function CompanyLogin() {
                   placeholder="Email"
                   onChange={(e) => setEmail(e.target.value)}
                 />
-                {!email && alertemail}
+                {email === "" && alertemail}
                 <input
                   type="password"
                   className="form-control"
                   placeholder="Password"
                   onChange={(e) => setPassword(e.target.value)}
                 />
-                {!password && alertPassword}
+                {password === "" && alertPassword}
 
-                <button className="btn btn-login" onClick={companyLogin}>
+                <button
+                  className="btn btn-login"
+                  onClick={companyLogin}
+                  disabled={disableBtn}
+                >
                   Login
                 </button>
+                {loggedIn === false && loggedInAlert}
                 <span>
                   You Have No Account?
                   <Link to={"/company/register"}> Create An Account</Link>
@@ -70,6 +88,7 @@ function CompanyLogin() {
           </div>
         </section>
       </div>
+      {loggedIn && <Navigate to="/company/home" replace />}
     </div>
   );
 }

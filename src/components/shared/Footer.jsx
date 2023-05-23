@@ -1,5 +1,5 @@
-import React from 'react'
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
 
 function Footer() {
   return (
@@ -13,7 +13,6 @@ function Footer() {
               alt=""
             />
           </div>
-         
         </div>
       </div>
       <div className="row no-padding">
@@ -23,8 +22,6 @@ function Footer() {
               <h3 className="widgettitle widget-title">About Job Stock</h3>
 
               <div className="textwidget">
-               
-
                 <p>Petite Ariana</p>
 
                 <p>
@@ -32,8 +29,7 @@ function Footer() {
                 </p>
 
                 <p>
-                  <strong>Call:</strong>{" "}
-                  <a href="tel:+216">97-560-524</a>
+                  <strong>Call:</strong> <a href="tel:+216">97-560-524</a>
                 </p>
                 <ul className="footer-social">
                   <li>
@@ -169,7 +165,9 @@ function Footer() {
                   ></textarea>
                   <button type="submit" className="btn btn-primary">
                     <span>
-                      <Link to="user/login">Login</Link>
+                      <Link to="user/login" style={{ color: "white" }}>
+                        Send
+                      </Link>
                     </span>
                   </button>
                 </form>
@@ -179,13 +177,10 @@ function Footer() {
         </div>
       </div>
       <div className="row copyright">
-        <div className="container">
-         
-        </div>
+        <div className="container"></div>
       </div>
     </footer>
   );
 }
 
-
-export default Footer
+export default Footer;
