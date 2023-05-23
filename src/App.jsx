@@ -9,6 +9,7 @@ import UserHome from "./components/user/UserHome";
 import CompanyLogin from "./components/company/CompanyLogin";
 import CompanyRegister from "./components/company/CompanyRegister";
 import CompanyForgetPassword from "./components/company/CompanyForgetPassword";
+import CompanyResetPass from "./components/company/CompanyResetPass";
 import CompanyHome from "./components/company/CompanyHome";
 import AdminLogin from "./components/admin/AdminLogin";
 import AdminRegister from "./components/admin/AdminRegister";
@@ -22,7 +23,7 @@ import ApplicantManager from "./components/company/ApplicantManager";
 const App = () => (
   <BrowserRouter>
     <Routes>
-      <Route path="" element={<CompanyHome />} />
+      <Route path="" element={<MainContainer />} />
 
       <Route path="admin">
         <Route path="" element={<Navigate to="login" replace />} />
@@ -46,6 +47,7 @@ const App = () => (
         <Route path="register" element={<CompanyRegister />} />
         <Route path="forgetpass" element={<CompanyForgetPassword />} />
         <Route path="home" element={<CompanyHome />} />
+        <Route path="resetPass" element={<CompanyResetPass />} />
         <Route path="createoffer" element={<CreateOffer />} />
         <Route path="applicant" element={<ApplicantManager />} />
       </Route>

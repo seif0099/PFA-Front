@@ -1,9 +1,12 @@
-import React from 'react'
-import CompanyNavbar from './CompanyNavbar'
-import Footer from '../shared/Footer'
-import { Link } from 'react-router-dom';
-
+import React from "react";
+import CompanyNavbar from "./CompanyNavbar";
+import Footer from "../shared/Footer";
+import { Navigate } from "react-router-dom";
+import { isAuth } from "../../services/shared/isAuth";
+import { isCompany } from "../../services/company/IsCompany";
 function ApplicantManager() {
+  if (!isAuth() || !isCompany())
+    return <Navigate to={"/company/login"} replace />;
   return (
     <div>
       <CompanyNavbar />
@@ -71,13 +74,12 @@ function ApplicantManager() {
                 </div>
               </article>
             </div>
+          </div>
         </div>
-</div>
-              
       </section>
       <Footer />
     </div>
   );
 }
 
-export default ApplicantManager
+export default ApplicantManager;

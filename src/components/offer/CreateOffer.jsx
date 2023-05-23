@@ -1,21 +1,23 @@
-import React from 'react'
-import CompanyNavbar from '../company/CompanyNavbar';
-import Footer from './../shared/Footer';
-
+import React from "react";
+import CompanyNavbar from "../company/CompanyNavbar";
+import Footer from "./../shared/Footer";
+import { Link, Navigate } from "react-router-dom";
+import { isAuth } from "../../services/shared/isAuth";
+import { isCompany } from "../../services/company/IsCompany";
 function CreateOffer() {
+  if (!isAuth() || !isCompany())
+    return <Navigate to={"/company/login"} replace />;
   return (
-
     <div class="detail-desc section">
-      
-    <CompanyNavbar/>
-  <section
+      <CompanyNavbar />
+      <section
         className="inner-header-title"
         style={{ backgroundImage: "url('/assets/img/banner-5.jpg')" }}
       >
         <div className="container">
           <h1>Create Job</h1>
         </div>
-        </section>
+      </section>
       <div class="clearfix"></div>
 
       <div class="container white-shadow">
@@ -38,9 +40,9 @@ function CreateOffer() {
 
         <div class="row bottom-mrg">
           <form class="add-feild">
-            <h2 class="detail-title" 
-            style={{width:"fit-content"}}
-            >Job Requirement</h2>
+            <h2 class="detail-title" style={{ width: "fit-content" }}>
+              Job Requirement
+            </h2>
 
             <div class="col-md-6 col-sm-6">
               <div class="input-group">
@@ -299,4 +301,4 @@ function CreateOffer() {
   );
 }
 
-export default CreateOffer
+export default CreateOffer;
