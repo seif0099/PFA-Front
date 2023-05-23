@@ -14,10 +14,13 @@ import AdminLogin from "./components/admin/AdminLogin";
 import AdminRegister from "./components/admin/AdminRegister";
 import AdminForgetPassword from "./components/admin/AdminForgetPassword";
 import UserResetPass from "./components/user/UserResetPass";
+import MainContainer from "./components/shared/MainContainer";
 
 const App = () => (
   <BrowserRouter>
     <Routes>
+      <Route path="" element={<MainContainer />} />
+
       <Route path="admin">
         <Route path="" element={<Navigate to="login" replace />} />
         <Route path="login" element={<AdminLogin />} />
