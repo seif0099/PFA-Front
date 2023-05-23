@@ -15,11 +15,14 @@ import AdminRegister from "./components/admin/AdminRegister";
 import AdminForgetPassword from "./components/admin/AdminForgetPassword";
 import UserResetPass from "./components/user/UserResetPass";
 import MainContainer from "./components/shared/MainContainer";
+import SearchJob from "./components/user/SearchJob";
+import CreateOffer from "./components/offer/CreateOffer";
+import ApplicantManager from "./components/company/ApplicantManager";
 
 const App = () => (
   <BrowserRouter>
     <Routes>
-      <Route path="" element={<MainContainer />} />
+      <Route path="" element={<CompanyHome />} />
 
       <Route path="admin">
         <Route path="" element={<Navigate to="login" replace />} />
@@ -43,6 +46,8 @@ const App = () => (
         <Route path="register" element={<CompanyRegister />} />
         <Route path="forgetpass" element={<CompanyForgetPassword />} />
         <Route path="home" element={<CompanyHome />} />
+        <Route path="createoffer" element={<CreateOffer />} />
+        <Route path="applicant" element={<ApplicantManager />} />
       </Route>
 
       <Route path="*" element={<NotFound />} />

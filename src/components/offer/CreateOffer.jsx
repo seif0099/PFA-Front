@@ -1,13 +1,21 @@
 import React from 'react'
+import CompanyNavbar from '../company/CompanyNavbar';
+import Footer from './../shared/Footer';
 
 function CreateOffer() {
   return (
+
     <div class="detail-desc section">
-      <section class="inner-header-title blank">
-        <div class="container">
-          <h1>Create Job Offer</h1>
+      
+    <CompanyNavbar/>
+  <section
+        className="inner-header-title"
+        style={{ backgroundImage: "url('/assets/img/banner-5.jpg')" }}
+      >
+        <div className="container">
+          <h1>Create Job</h1>
         </div>
-      </section>
+        </section>
       <div class="clearfix"></div>
 
       <div class="container white-shadow">
@@ -286,6 +294,7 @@ function CreateOffer() {
           </div>
         </div>
       </section>
+      <Footer />
     </div>
   );
 }
