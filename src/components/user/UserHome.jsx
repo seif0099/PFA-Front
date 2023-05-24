@@ -5,6 +5,7 @@ import { Navigate } from "react-router-dom";
 import Footer from "../shared/Footer";
 import Navbar from "../shared/Navbar";
 const UserHome = () => {
+  if (!isAuth() || !isUser()) return <Navigate to={"/user/login"} replace />;
 
 
   return (

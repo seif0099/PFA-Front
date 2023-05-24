@@ -13,7 +13,8 @@ function CompanyRegister() {
       companyCode,
       email,
       password,
-      address
+      address,
+      image
     )
       .then((res) => {
         setEndRegister(true);
@@ -33,6 +34,7 @@ function CompanyRegister() {
   const [password, setPassword] = useState(null);
   const [confirmPass, setConfirmPass] = useState(null);
   const [address, setAddress] = useState(null);
+  const [image, setImage] = useState(null);
   const [endRegister, setEndRegister] = useState(null);
   const [errMssg, setErrMsg] = useState(null);
 
@@ -54,62 +56,68 @@ function CompanyRegister() {
     confirmPass === null ||
     confirmPass === "" ||
     address === null ||
-    address === "";
+    address === "" ||
+    image === null;
 
   const alreadyExistAlert = (
     <div className="alert alert-danger" role="alert" style={{ marginTop: 15 }}>
       {`${errMssg} !`}
     </div>
   );
+  const alertCompanyImage = (
+    <div className="alert alert-info" role="alert">
+      You should choose the Company Image !
+    </div>
+  );
 
   const alertCompanyName = (
-    <div class="alert alert-danger" role="alert">
+    <div className="alert alert-danger" role="alert">
       You should fill the company name !
     </div>
   );
   const alertDescription = (
-    <div class="alert alert-danger" role="alert">
+    <div className="alert alert-danger" role="alert">
       You should fill the description !
     </div>
   );
 
   const alertPhone = (
-    <div class="alert alert-danger" role="alert">
+    <div className="alert alert-danger" role="alert">
       You should fill telephone !
     </div>
   );
   const alertSiteWeb = (
-    <div class="alert alert-danger" role="alert">
+    <div className="alert alert-danger" role="alert">
       You should fill the web site name !
     </div>
   );
   const alertCompanyCode = (
-    <div class="alert alert-danger" role="alert">
+    <div className="alert alert-danger" role="alert">
       You should fill the company code field !
     </div>
   );
   const alertEmail = (
-    <div class="alert alert-danger" role="alert">
+    <div className="alert alert-danger" role="alert">
       You should fill email field !
     </div>
   );
   const alertPassword = (
-    <div class="alert alert-danger" role="alert">
+    <div className="alert alert-danger" role="alert">
       You should fill email field !
     </div>
   );
   const alertAddress = (
-    <div class="alert alert-danger" role="alert">
+    <div className="alert alert-danger" role="alert">
       You should fill address field !
     </div>
   );
   const wrongConfirmPass = (
-    <div class="alert alert-danger" role="alert">
+    <div className="alert alert-danger" role="alert">
       Password confirmation doesn't match
     </div>
   );
   const alertConfirmPassword = (
-    <div class="alert alert-danger" role="alert">
+    <div className="alert alert-danger" role="alert">
       You should fill confirm password field !
     </div>
   );
@@ -209,7 +217,15 @@ function CompanyRegister() {
                   onChange={(e) => setCompanyCode(e.target.value)}
                 />
                 {companyCode === "" && alertCompanyCode}
-
+                <label>Choose Company Cover</label>
+                <input
+                  type="file"
+                  className="form-control"
+                  accept=".jpg,.png,.JPEG"
+                  name="image"
+                  onChange={(e) => setImage(e.target.files[0])}
+                />
+                {image === null && alertCompanyImage}
                 <button
                   className="btn btn-login"
                   disabled={disableBtn}
@@ -217,6 +233,7 @@ function CompanyRegister() {
                 >
                   Register
                 </button>
+                {errMssg && alreadyExistAlert}
                 <span>
                   Have You Account?
                   <Link to={"/company/login"}>Login</Link>

@@ -89,7 +89,7 @@ function CompanyForgetPassword() {
                 >
                   Send Mail
                 </button>
-                {validate === "User does not exist !" && alertFail}
+                {validate === "Company does not exist !" && alertFail}
                 <span>
                   Have You Account?
                   <Link to={"/company/login"}>Login</Link>

@@ -48,7 +48,7 @@ function Navbar() {
               <li>
                 <Link
                   to={"/company"}
-                  style={{ right: "-127rem", top: "-6rem", color: "white" }}
+                  style={{ right: "-126rem", top: "-6rem", color: "white" }}
                   className="signin"
                 >
                   <i className="bi bi-briefcase-fill"></i>

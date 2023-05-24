@@ -1,10 +1,14 @@
 import React from "react";
-import Navbar from "../shared/Navbar";
 import Footer from "../shared/Footer";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import CompanyNavbar from "./CompanyNavbar";
+import { isAuth } from "../../services/shared/isAuth";
+import { isCompany } from "../../services/company/IsCompany";
 
 const CompanyHome = () => {
+  if (!isAuth() || !isCompany())
+    return <Navigate to={"/company/login"} replace />;
+
   return (
     <div>
       <CompanyNavbar />
@@ -102,7 +106,7 @@ const CompanyHome = () => {
                   <div className="col-md-2 col-sm-2">
                     <div className="mng-company-pic">
                       <img
-                        src="assets/img/com-2.jpg"
+                        src="/assets/img/com-2.jpg"
                         className="img-responsive"
                         alt=""
                       />
@@ -143,7 +147,7 @@ const CompanyHome = () => {
                   <div className="col-md-2 col-sm-2">
                     <div className="mng-company-pic">
                       <img
-                        src="assets/img/com-3.jpg"
+                        src="/assets/img/com-3.jpg"
                         className="img-responsive"
                         alt=""
                       />
@@ -184,7 +188,7 @@ const CompanyHome = () => {
                   <div className="col-md-2 col-sm-2">
                     <div className="mng-company-pic">
                       <img
-                        src="assets/img/com-4.jpg"
+                        src="/assets/img/com-4.jpg"
                         className="img-responsive"
                         alt=""
                       />
@@ -225,7 +229,7 @@ const CompanyHome = () => {
                   <div className="col-md-2 col-sm-2">
                     <div className="mng-company-pic">
                       <img
-                        src="assets/img/com-5.jpg"
+                        src="/assets/img/com-5.jpg"
                         className="img-responsive"
                         alt=""
                       />
@@ -266,7 +270,7 @@ const CompanyHome = () => {
                   <div className="col-md-2 col-sm-2">
                     <div className="mng-company-pic">
                       <img
-                        src="assets/img/com-6.jpg"
+                        src="/assets/img/com-6.jpg"
                         className="img-responsive"
                         alt=""
                       />
@@ -309,7 +313,7 @@ const CompanyHome = () => {
                   <div className="col-md-2 col-sm-2">
                     <div className="mng-company-pic">
                       <img
-                        src="assets/img/com-7.jpg"
+                        src="/assets/img/com-7.jpg"
                         className="img-responsive"
                         alt=""
                       />

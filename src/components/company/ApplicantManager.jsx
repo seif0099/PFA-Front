@@ -1,18 +1,13 @@
-import React, { useEffect, useState } from 'react'
-import CompanyNavbar from './CompanyNavbar'
-import Footer from '../shared/Footer'
-import axios from 'axios'
-import { getOffre } from '../../services/company/offer'
 
+import React from "react";
+import CompanyNavbar from "./CompanyNavbar";
+import Footer from "../shared/Footer";
+import { Navigate } from "react-router-dom";
+import { isAuth } from "../../services/shared/isAuth";
+import { isCompany } from "../../services/company/IsCompany";
 function ApplicantManager() {
-  const [data, setData] = useState([])
-  useEffect(() => {
-    const res = getOffre();
-    console.log(res);
-  }, [])
-
-
-  
+  if (!isAuth() || !isCompany())
+    return <Navigate to={"/company/login"} replace />;
   return (
     <div>
       <CompanyNavbar />
@@ -92,4 +87,4 @@ function ApplicantManager() {
   );
 }
 
-export default ApplicantManager
+export default ApplicantManager;

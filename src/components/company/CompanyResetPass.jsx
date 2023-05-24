@@ -79,7 +79,7 @@ const CompanyResetPass = () => {
       </div>
     );
   }
-  if (validate === "User does not exist !") {
+  if (validate === "Company does not exist !") {
     return (
       <div className="simple-bg-screen" style={{ minHeight: "100vh" }}>
         <div className="Loader"></div>
@@ -97,11 +97,11 @@ const CompanyResetPass = () => {
                 {alertFail}
                 <span>
                   Have You Account?
-                  <Link to={"/user/login"}>Login</Link>
+                  <Link to={"/company/login"}>Login</Link>
                 </span>
                 <span>
                   You Have No Account?
-                  <Link to={"/user/register"}> Create An Account</Link>
+                  <Link to={"/company/register"}> Create An Account</Link>
                 </span>
               </div>
             </div>

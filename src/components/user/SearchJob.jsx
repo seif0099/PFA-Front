@@ -1,6 +1,9 @@
-import React from 'react'
-
+import React from "react";
+import { Navigate } from "react-router-dom";
+import { isAuth } from "../../services/shared/isAuth";
+import { isUser } from "../../services/user/IsUser";
 function SearchJob() {
+  if (!isAuth() || !isUser()) return <Navigate to={"/user/login"} replace />;
   return (
     <div class="detail-desc section">
       <section class="inner-header-title blank">
@@ -80,8 +83,6 @@ function SearchJob() {
             </div>
           </form>
         </div>
-
-    
       </div>
 
       <section class="full-detail">
@@ -272,7 +273,7 @@ function SearchJob() {
               </div>
               <div class="col-md-12 col-sm-12">
                 <button class="btn btn-success btn-primary small-btn">
-                  Submit 
+                  Submit
                 </button>
               </div>
             </form>
@@ -283,4 +284,4 @@ function SearchJob() {
   );
 }
 
-export default SearchJob
+export default SearchJob;

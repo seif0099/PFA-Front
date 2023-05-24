@@ -1,11 +1,10 @@
-import React from 'react'
-import { Link } from 'react-router-dom';
-
+import React from "react";
+import { Link } from "react-router-dom";
+import { logout } from "../../services/shared/Logout";
 function CompanyNavbar() {
   return (
     <div>
       <nav className="navbar navbar-default navbar-fixed navbar-transparent white bootsnav">
-        
         <div className="container">
           <button
             type="button"
@@ -16,14 +15,14 @@ function CompanyNavbar() {
             <i className="fa fa-bars"></i>
           </button>
           <div className="navbar-header">
-            <a className="navbar-brand" href="index-2.html">
+            <div className="navbar-brand">
               <img
                 src="/assets/img/logo-white.png"
                 className="logo logo-display"
                 alt=""
                 style={{ position: "relative", right: "140vh" }}
               />
-            </a>
+            </div>
           </div>
           <div className="collapse navbar-collapse" id="navbar-menu">
             <ul
@@ -33,14 +32,15 @@ function CompanyNavbar() {
               style={{
                 display: "inline-block",
                 position: "relative",
-                right: "100vh",
+                right: "105rem",
               }}
             >
               <li>
                 <Link
-                  to={"/company"}
+                  to={"/"}
                   style={{ right: "-138vh", top: "-6vh", color: "white" }}
                   className="signin"
+                  onClick={logout}
                 >
                   <i className="bi bi-power"></i>
                   Disconnect
@@ -69,4 +69,4 @@ function CompanyNavbar() {
   );
 }
 
-export default CompanyNavbar
+export default CompanyNavbar;
