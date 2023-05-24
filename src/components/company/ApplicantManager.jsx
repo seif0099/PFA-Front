@@ -1,13 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CompanyNavbar from "./CompanyNavbar";
 import Footer from "../shared/Footer";
 import { Navigate } from "react-router-dom";
 import { isAuth } from "../../services/shared/isAuth";
 import { isCompany } from "../../services/company/IsCompany";
+import { getOffre } from "./../../services/company/offer";
 function ApplicantManager() {
   const [data, setData] = useState([]);
+  useEffect(() => {
+    const res = getOffre();
+    for (var i = 0; i <= res.length; i++) {
+      data[i] = res[i];
+      console.log(data[i], "aa");
+    }
+  }, []);
+
   if (!isAuth() || !isCompany())
     return <Navigate to={"/company/login"} replace />;
+
   return (
     <div>
       <CompanyNavbar />
@@ -40,7 +50,7 @@ function ApplicantManager() {
                     <div className="col-md-2 col-sm-2">
                       <div className="mng-company-pic">
                         <img
-                          src="/assets/img/com-1.jpg"
+                          src={item.image}
                           className="img-responsive"
                           alt=""
                         />
@@ -49,19 +59,15 @@ function ApplicantManager() {
                     <div className="col-md-5 col-sm-5">
                       <div className="mng-company-name">
                         <h4>
-                          Autodesk{" "}
-                          <span className="cmp-tagline">
-                            (Software Company)
-                          </span>
+                          {item.title}
+                          <span className="cmp-tagline">{item.experience}</span>
                         </h4>
-                        <span className="cmp-time">10 Hour Ago</span>
                       </div>
                     </div>
                     <div className="col-md-4 col-sm-4">
                       <div className="mng-company-location">
                         <p>
-                          <i className="fa fa-map-marker"></i> Street #210, Make
-                          New London
+                          <i className="fa fa-map-marker"></i> {item.address}
                         </p>
                       </div>
                     </div>
