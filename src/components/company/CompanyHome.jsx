@@ -13,7 +13,7 @@ const CompanyHome = () => {
 
       <section
         className="inner-header-title"
-        style={{ backgroundImage: "url('assets/img/banner-10.jpg')" }}
+        style={{ backgroundImage: "url('/assets/img/banner-10.jpg')" }}
       >
         <div className="container">
           <h1>Company Home</h1>
@@ -61,7 +61,7 @@ const CompanyHome = () => {
                   <div className="col-md-2 col-sm-2">
                     <div className="mng-company-pic">
                       <img
-                        src="assets/img/com-1.jpg"
+                        src="/assets/img/com-1.jpg"
                         className="img-responsive"
                         alt=""
                       />

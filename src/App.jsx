@@ -22,7 +22,7 @@ import ApplicantManager from "./components/company/ApplicantManager";
 const App = () => (
   <BrowserRouter>
     <Routes>
-      <Route path="" element={<CompanyHome />} />
+      <Route path="" element={<MainContainer />} />
 
       <Route path="admin">
         <Route path="" element={<Navigate to="login" replace />} />
