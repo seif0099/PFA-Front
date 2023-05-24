@@ -8,13 +8,13 @@ import { getOffre } from "./../../services/company/offer";
 function ApplicantManager() {
   const [data, setData] = useState([]);
   useEffect(() => {
-    const res = getOffre();
-    for (var i = 0; i <= res.length; i++) {
-      data[i] = res[i];
-      console.log(data[i], "aa");
-    }
+    getOffre()
+      .then((response) => {
+        setData(response);
+      })
+      .catch((err) => console.log(err));
   }, []);
-
+  console.log(data);
   if (!isAuth() || !isCompany())
     return <Navigate to={"/company/login"} replace />;
 
@@ -43,9 +43,8 @@ function ApplicantManager() {
               }}
             >
               <h3>Jobs Requests to our company</h3>
-
-              {data.map((item) => (
-                <article>
+              {data.map((item, index) => (
+                <article key={index}>
                   <div className="mng-company">
                     <div className="col-md-2 col-sm-2">
                       <div className="mng-company-pic">
@@ -59,7 +58,7 @@ function ApplicantManager() {
                     <div className="col-md-5 col-sm-5">
                       <div className="mng-company-name">
                         <h4>
-                          {item.title}
+                          {item.titre}
                           <span className="cmp-tagline">{item.experience}</span>
                         </h4>
                       </div>
