@@ -1,301 +1,162 @@
-import React from "react";
+import React, { useState } from "react";
 import CompanyNavbar from "../company/CompanyNavbar";
 import Footer from "./../shared/Footer";
-import { Link, Navigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { isAuth } from "../../services/shared/isAuth";
 import { isCompany } from "../../services/company/IsCompany";
+import { addJob } from "../../services/offer/AddJob";
 function CreateOffer() {
+  const handleExperience = (e) => {
+    const value = e.target.value;
+    if (!isNaN(value)) setExpreience(value);
+    else setExpreience("");
+  };
+  const handleSalaire = (e) => {
+    const value = e.target.value;
+    if (!isNaN(value)) setSalaire(value);
+    else setSalaire("");
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    addJob(title, salaire, description, type, experience, adresse, deadLine)
+      .then((response) => console.log(response))
+      .catch((err) => console.log(err));
+  };
+  const [title, setTitle] = useState(null);
+  const [salaire, setSalaire] = useState(null);
+  const [description, setDescription] = useState(null);
+  const [type, setType] = useState(null);
+  const [experience, setExpreience] = useState(null);
+  const [adresse, setAdresse] = useState(null);
+  const [deadLine, setDeadLine] = useState(null);
+
   if (!isAuth() || !isCompany())
     return <Navigate to={"/company/login"} replace />;
   return (
-    <div class="detail-desc section">
+    <div>
       <CompanyNavbar />
-      <section
-        className="inner-header-title"
-        style={{ backgroundImage: "url('/assets/img/banner-5.jpg')" }}
-      >
-        <div className="container">
-          <h1>Create Job</h1>
-        </div>
-      </section>
-      <div class="clearfix"></div>
-
-      <div class="container white-shadow">
-        <div class="row">
-          <div class="detail-pic js">
-            <div class="box">
-              <input
-                type="text"
-                name="upload-pic[]"
-                id="upload-pic"
-                class="inputfile"
-              />
-              <label for="upload-pic">
-                <i class="fa fa-user" aria-hidden="true"></i>
-                <span></span>
-              </label>
-            </div>
+      <div className="detail-desc section">
+        <section
+          className="inner-header-title"
+          style={{
+            backgroundImage: "url('/assets/img/banner-5.jpg')",
+          }}
+        >
+          <div className="container">
+            <h1>Create Job</h1>
           </div>
-        </div>
+        </section>
+        <div className="clearfix"></div>
 
-        <div class="row bottom-mrg">
-          <form class="add-feild">
-            <h2 class="detail-title" style={{ width: "fit-content" }}>
-              Job Requirement
-            </h2>
-
-            <div class="col-md-6 col-sm-6">
-              <div class="input-group">
+        <div className="container white-shadow">
+          <div className="row">
+            <div className="detail-pic js">
+              <div className="box">
                 <input
                   type="text"
-                  class="form-control"
-                  placeholder="Job Title"
+                  name="upload-pic[]"
+                  id="upload-pic"
+                  className="inputfile"
                 />
+                <label for="upload-pic" style={{ cursor: "default" }}>
+                  <i className="fa fa-briefcase" aria-hidden="true"></i>
+                  <span></span>
+                </label>
               </div>
             </div>
-
-            <div class="col-md-6 col-sm-6">
-              <div class="input-group">
-                <input type="text" class="form-control" placeholder="salaire" />
-              </div>
-            </div>
-
-            <div class="col-md-12 col-sm-12">
-              <textarea
-                class="form-control"
-                placeholder="Job Description"
-              ></textarea>
-            </div>
-
-            <div class="col-md-6 col-sm-6">
-              <div class="input-group">
-                <input type="text" class="form-control" placeholder="Type" />
-              </div>
-            </div>
-
-            <div class="col-md-6 col-sm-6">
-              <div class="input-group">
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="Experience"
-                />
-              </div>
-            </div>
-
-            <div class="col-md-6 col-sm-6">
-              <div class="input-group">
-                <input type="text" class="form-control" placeholder="Adresse" />
-              </div>
-            </div>
-
-            <div class="col-md-6 col-sm-6">
-              <div class="input-group">
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="DeadLine"
-                />
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
-
-      <section class="full-detail">
-        <div class="container">
-          <div class="row bottom-mrg extra-mrg">
-            <form>
-              <h2 class="detail-title">Company Information</h2>
-
-              <div class="col-md-6 col-sm-6">
-                <div class="input-group">
-                  <span class="input-group-addon">
-                    <i class="fa fa-flag"></i>
-                  </span>
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="Company Name"
-                  />
-                </div>
-              </div>
-
-              <div class="col-md-6 col-sm-6">
-                <div class="input-group">
-                  <span class="input-group-addon">
-                    <i class="fa fa-pencil"></i>
-                  </span>
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="Company Tagline"
-                  />
-                </div>
-              </div>
-
-              <div class="col-md-6 col-sm-6">
-                <div class="input-group">
-                  <span class="input-group-addon">
-                    <i class="fa fa-envelope"></i>
-                  </span>
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="Company Email"
-                  />
-                </div>
-              </div>
-
-              <div class="col-md-6 col-sm-6">
-                <div class="input-group">
-                  <span class="input-group-addon">
-                    <i class="fa fa-map-marker"></i>
-                  </span>
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="Local E.g. It Park New"
-                  />
-                </div>
-              </div>
-
-              <div class="col-md-6 col-sm-6">
-                <div class="input-group">
-                  <span class="input-group-addon">
-                    <i class="fa fa-globe"></i>
-                  </span>
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="Website"
-                  />
-                </div>
-              </div>
-
-              <div class="col-md-6 col-sm-6">
-                <div class="input-group">
-                  <span class="input-group-addon">
-                    <i class="fa fa-birthday-cake"></i>
-                  </span>
-                  <input
-                    type="text"
-                    id="company-dob"
-                    data-lang="en"
-                    data-large-mode="true"
-                    data-min-year="2017"
-                    data-max-year="2020"
-                    data-disabled-days="08/17/2017,08/18/2017"
-                    data-id="datedropper-0"
-                    data-theme="my-style"
-                    class="form-control"
-                    readonly=""
-                  />
-                </div>
-              </div>
-            </form>
           </div>
 
-          <div class="row bottom-mrg extra-mrg">
-            <form>
-              <h2 class="detail-title">Social Profile</h2>
+          <div className="row bottom-mrg">
+            <form className="add-feild">
+              <h2 className="detail-title" style={{ width: "fit-content" }}>
+                Job Requirement
+              </h2>
 
-              <div class="col-md-6 col-sm-6">
-                <div class="input-group">
-                  <span class="input-group-addon">
-                    <i class="fa fa-facebook"></i>
-                  </span>
+              <div className="col-md-6 col-sm-6">
+                <div className="input-group">
                   <input
                     type="text"
-                    class="form-control"
-                    placeholder="Profile Link"
+                    className="form-control"
+                    placeholder="Job Title"
+                    onChange={(e) => setTitle(e.target.value)}
                   />
                 </div>
               </div>
 
-              <div class="col-md-6 col-sm-6">
-                <div class="input-group">
-                  <span class="input-group-addon">
-                    <i class="fa fa-google-plus"></i>
-                  </span>
+              <div className="col-md-6 col-sm-6">
+                <div className="input-group">
                   <input
                     type="text"
-                    class="form-control"
-                    placeholder="Profile Link"
+                    className="form-control"
+                    placeholder="salaire"
+                    onChange={handleSalaire}
+                    value={salaire}
                   />
                 </div>
               </div>
 
-              <div class="col-md-6 col-sm-6">
-                <div class="input-group">
-                  <span class="input-group-addon">
-                    <i class="fa fa-twitter"></i>
-                  </span>
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="Profile Link"
-                  />
-                </div>
-              </div>
-              <div class="col-md-6 col-sm-6">
-                <div class="input-group">
-                  <span class="input-group-addon">
-                    <i class="fa fa-instagram"></i>
-                  </span>
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="Profile Link"
-                  />
-                </div>
-              </div>
-
-              <div class="col-md-6 col-sm-6">
-                <div class="input-group">
-                  <span class="input-group-addon">
-                    <i class="fa fa-linkedin"></i>
-                  </span>
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="Profile Link"
-                  />
-                </div>
-              </div>
-
-              <div class="col-md-6 col-sm-6">
-                <div class="input-group">
-                  <span class="input-group-addon">
-                    <i class="fa fa-dribbble"></i>
-                  </span>
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="Profile Link"
-                  />
-                </div>
-              </div>
-            </form>
-          </div>
-
-          <div class="row bottom-mrg extra-mrg">
-            <form>
-              <div class="col-md-12 col-sm-12">
+              <div className="col-md-12 col-sm-12">
                 <textarea
-                  class="form-control textarea"
-                  placeholder="About Company"
+                  className="form-control"
+                  placeholder="Job Description"
+                  onChange={(e) => setDescription(e.target.value)}
                 ></textarea>
               </div>
-              <div class="col-md-12 col-sm-12">
-                <button class="btn btn-success btn-primary small-btn">
-                  Submit The Offer
-                </button>
+
+              <div className="col-md-6 col-sm-6">
+                <div className="input-group">
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Type"
+                    onChange={(e) => setType(e.target.value)}
+                  />
+                </div>
+              </div>
+
+              <div className="col-md-6 col-sm-6">
+                <div className="input-group">
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Experience"
+                    onChange={handleExperience}
+                    value={experience}
+                  />
+                </div>
+              </div>
+
+              <div className="col-md-6 col-sm-6">
+                <div className="input-group">
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Adresse"
+                    onChange={(e) => setAdresse(e.target.value)}
+                  />
+                </div>
+              </div>
+
+              <div className="col-md-6 col-sm-6">
+                <div className="input-group">
+                  <input
+                    type="date"
+                    className="form-control"
+                    placeholder="DeadLine"
+                    onChange={(e) => setDeadLine(e.target.value)}
+                  />
+                </div>
               </div>
             </form>
+            <button
+              className="btn btn-success btn-primary small-btn"
+              onClick={handleSubmit}
+            >
+              Submit The Offer
+            </button>
           </div>
         </div>
-      </section>
+      </div>
       <Footer />
     </div>
   );

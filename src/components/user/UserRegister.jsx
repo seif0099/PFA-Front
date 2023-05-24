@@ -60,8 +60,26 @@ function UserRegister() {
     address === "" ||
     age === "" ||
     phone === "" ||
-    password !== confirmPass;
+    password !== confirmPass ||
+    image === null ||
+    cv === null ||
+    cover === null;
   //ALERTS
+  const alertUserImage = (
+    <div className="alert alert-info" role="alert">
+      You should choose the user Image !
+    </div>
+  );
+  const alertUserCover = (
+    <div className="alert alert-info" role="alert">
+      You should choose the user cover !
+    </div>
+  );
+  const alertUserCv = (
+    <div className="alert alert-info" role="alert">
+      You should choose the user cv !
+    </div>
+  );
   const alreadyExistAlert = (
     <div className="alert alert-danger" role="alert" style={{ marginTop: 15 }}>
       {`${errMssg} !`}
@@ -223,6 +241,7 @@ function UserRegister() {
                   name="image"
                   onChange={(e) => setImage(e.target.files[0])}
                 />
+                {image === null && alertUserImage}
                 <label>Choose CV</label>
                 <input
                   type="file"
@@ -231,6 +250,7 @@ function UserRegister() {
                   name="cv"
                   onChange={(e) => setCv(e.target.files[0])}
                 />
+                {cv === null && alertUserCv}
                 <label>Choose Cover Letter</label>
                 <input
                   type="file"
@@ -239,7 +259,7 @@ function UserRegister() {
                   name="cover"
                   onChange={(e) => setCover(e.target.files[0])}
                 />
-
+                {cover === null && alertUserCover}
                 <button
                   className="btn btn-login"
                   disabled={disableBtn}
