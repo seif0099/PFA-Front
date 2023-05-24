@@ -8,6 +8,8 @@ import { isCompany } from "../../services/company/IsCompany";
 function ApplicantManager() {
   if (!isAuth() || !isCompany())
     return <Navigate to={"/company/login"} replace />;
+  if (!isAuth() || !isCompany())
+    return <Navigate to={"/company/login"} replace />;
   return (
     <div>
       <CompanyNavbar />
@@ -79,6 +81,8 @@ function ApplicantManager() {
                 </article>
               ))}
             </div>
+          </div>
+        </div>
           </div>
         </div>
       </section>
