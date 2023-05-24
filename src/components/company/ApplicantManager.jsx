@@ -63,7 +63,7 @@ function ApplicantManager() {
                     <div className="col-md-5 col-sm-5">
                       <div className="mng-company-name">
                         <h4>
-                          {item.title}
+                          {item.titre}
                           <span className="cmp-tagline">
                             {item.experience}
                           </span>
