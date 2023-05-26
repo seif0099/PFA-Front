@@ -14,7 +14,7 @@ function ApplicantManager() {
       })
       .catch((err) => console.log(err));
   }, []);
-  console.log(data);
+
   if (!isAuth() || !isCompany())
     return <Navigate to={"/company/login"} replace />;
 
@@ -46,27 +46,38 @@ function ApplicantManager() {
               {data.map((item, index) => (
                 <article key={index}>
                   <div className="mng-company">
-                    <div className="col-md-2 col-sm-2">
-                      <div className="mng-company-pic">
-                        <img
-                          src={item.image}
-                          className="img-responsive"
-                          alt=""
-                        />
-                      </div>
+                    <div className="col-md-2 col-sm-1">
+                      <img
+                        src={item.image}
+                        className="img-responsive"
+                        alt="hello"
+                        style={{ width: "10em" }}
+                      />
                     </div>
-                    <div className="col-md-5 col-sm-5">
-                      <div className="mng-company-name">
-                        <h4>
-                          {item.titre}
-                          <span className="cmp-tagline">{item.experience}</span>
-                        </h4>
-                      </div>
-                    </div>
-                    <div className="col-md-4 col-sm-4">
+                    <div className="col-md-2 col-sm-1">
                       <div className="mng-company-location">
-                        <p>
-                          <i className="fa fa-map-marker"></i> {item.address}
+                        <p style={{ fontWeight: "bolder" }}>{item.titre}</p>
+                      </div>
+                    </div>
+                    <div className="col-md-2 col-sm-1">
+                      <div className="mng-company-location">
+                        <p style={{ fontWeight: "bold" }}>{item.salaire} $</p>
+                      </div>
+                    </div>
+                    <div className="col-md-2 col-sm-1">
+                      <div className="mng-company-location">
+                        <p style={{ fontWeight: "bold" }}>{item.typee} </p>
+                      </div>
+                    </div>
+                    <div className="col-md-2 col-sm-1">
+                      <div className="mng-company-location">
+                        <p style={{ fontWeight: "bold" }}>{item.deadLine} </p>
+                      </div>
+                    </div>
+                    <div className="col-md-1 col-sm-1">
+                      <div className="mng-company-location">
+                        <p style={{ fontWeight: "bold" }}>
+                          {item.experience} years
                         </p>
                       </div>
                     </div>
