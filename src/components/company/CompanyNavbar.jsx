@@ -1,7 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { logout } from "../../services/shared/Logout";
 function CompanyNavbar() {
+  const Logout = () => {
+    logout();
+    return true;
+  };
   return (
     <div>
       <nav className="navbar navbar-default navbar-fixed navbar-transparent white bootsnav">
@@ -45,6 +49,7 @@ function CompanyNavbar() {
                   <i className="bi bi-power"></i>
                   Disconnect
                 </Link>
+                {Logout && <Navigate to={""} />}
               </li>
               <li>
                 <Link
