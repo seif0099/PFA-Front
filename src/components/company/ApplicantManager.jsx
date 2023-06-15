@@ -1,26 +1,22 @@
-
 import React, { useEffect, useState } from "react";
 import CompanyNavbar from "./CompanyNavbar";
 import Footer from "../shared/Footer";
 import { Navigate } from "react-router-dom";
 import { isAuth } from "../../services/shared/isAuth";
 import { isCompany } from "../../services/company/IsCompany";
-import { getOffre } from './../../services/company/offer';
+import { getOffre } from "./../../services/company/offer";
 function ApplicantManager() {
-  const [data, setData] = useState([])
+  const [data, setData] = useState([]);
   useEffect(() => {
-    const res =getOffre();
-         for (var i = 0; i <= res.length; i++) {
-           data[i] = res[i];
-           console.log(data[i], "aa");
-         }
+    getOffre()
+      .then((response) => {
+        setData(response);
+      })
+      .catch((err) => console.log(err));
   }, []);
-
+  console.log(data);
   if (!isAuth() || !isCompany())
     return <Navigate to={"/company/login"} replace />;
-
-
-
 
   return (
     <div>
@@ -47,9 +43,8 @@ function ApplicantManager() {
               }}
             >
               <h3>Jobs Requests to our company</h3>
-
-              {data.map((item) => (
-                <article>
+              {data.map((item, index) => (
+                <article key={index}>
                   <div className="mng-company">
                     <div className="col-md-2 col-sm-2">
                       <div className="mng-company-pic">
@@ -64,9 +59,7 @@ function ApplicantManager() {
                       <div className="mng-company-name">
                         <h4>
                           {item.titre}
-                          <span className="cmp-tagline">
-                            {item.experience}
-                          </span>
+                          <span className="cmp-tagline">{item.experience}</span>
                         </h4>
                       </div>
                     </div>
@@ -96,6 +89,7 @@ function ApplicantManager() {
       </section>
       <Footer />
     </div>
+    
   );
 }
 
