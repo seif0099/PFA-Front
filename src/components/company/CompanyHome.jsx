@@ -1,11 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Footer from "../shared/Footer";
 import { Link, Navigate } from "react-router-dom";
 import CompanyNavbar from "./CompanyNavbar";
 import { isAuth } from "../../services/shared/isAuth";
 import { isCompany } from "../../services/company/IsCompany";
-
+import { getOffre } from "./../../services/company/offer";
 const CompanyHome = () => {
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    getOffre()
+      .then((response) => {
+        setData(response);
+      })
+      .catch((err) => console.log(err));
+  }, []);
   if (!isAuth() || !isCompany())
     return <Navigate to={"/company/login"} replace />;
 
@@ -60,296 +68,57 @@ const CompanyHome = () => {
             >
               <h3>Jobs Available in our company</h3>
 
-              <article>
-                <div className="mng-company">
-                  <div className="col-md-2 col-sm-2">
-                    <div className="mng-company-pic">
+              {data.map((item, index) => (
+                <article key={index}>
+                  <div className="mng-company">
+                    <div className="col-md-2 col-sm-1">
                       <img
-                        src="/assets/img/com-1.jpg"
+                        src={item.image}
                         className="img-responsive"
-                        alt=""
+                        alt="hello"
+                        style={{ width: "10em" }}
                       />
                     </div>
-                  </div>
-                  <div className="col-md-5 col-sm-5">
-                    <div className="mng-company-name">
-                      <h4>
-                        Autodesk{" "}
-                        <span className="cmp-tagline">(Software Company)</span>
-                      </h4>
-                      <span className="cmp-time">10 Hour Ago</span>
+                    <div className="col-md-2 col-sm-1">
+                      <div className="mng-company-location">
+                        <p style={{ fontWeight: "bolder" }}>{item.titre}</p>
+                      </div>
+                    </div>
+                    <div className="col-md-2 col-sm-1">
+                      <div className="mng-company-location">
+                        <p style={{ fontWeight: "bold" }}>{item.salaire} $</p>
+                      </div>
+                    </div>
+                    <div className="col-md-2 col-sm-1">
+                      <div className="mng-company-location">
+                        <p style={{ fontWeight: "bold" }}>{item.typee} </p>
+                      </div>
+                    </div>
+                    <div className="col-md-2 col-sm-1">
+                      <div className="mng-company-location">
+                        <p style={{ fontWeight: "bold" }}>{item.deadLine} </p>
+                      </div>
+                    </div>
+                    <div className="col-md-1 col-sm-1">
+                      <div className="mng-company-location">
+                        <p style={{ fontWeight: "bold" }}>
+                          {item.experience} years
+                        </p>
+                      </div>
+                    </div>
+                    <div className="col-md-1 col-sm-1">
+                      <div className="mng-company-action">
+                        <a href="#" data-toggle="tooltip" title="Edit">
+                          <i className="fa fa-edit"></i>
+                        </a>
+                        <a href="#" data-toggle="tooltip" title="Delete">
+                          <i className="fa fa-trash-o"></i>
+                        </a>
+                      </div>
                     </div>
                   </div>
-                  <div className="col-md-4 col-sm-4">
-                    <div className="mng-company-location">
-                      <p>
-                        <i className="fa fa-map-marker"></i> Street #210, Make
-                        New London
-                      </p>
-                    </div>
-                  </div>
-                  <div className="col-md-1 col-sm-1">
-                    <div className="mng-company-action">
-                      <a href="#" data-toggle="tooltip" title="Edit">
-                        <i className="fa fa-edit"></i>
-                      </a>
-                      <a href="#" data-toggle="tooltip" title="Delete">
-                        <i className="fa fa-trash-o"></i>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </article>
-
-              <article>
-                <div className="mng-company">
-                  <div className="col-md-2 col-sm-2">
-                    <div className="mng-company-pic">
-                      <img
-                        src="/assets/img/com-2.jpg"
-                        className="img-responsive"
-                        alt=""
-                      />
-                    </div>
-                  </div>
-                  <div className="col-md-5 col-sm-5">
-                    <div className="mng-company-name">
-                      <h4>
-                        Google{" "}
-                        <span className="cmp-tagline">(Software Company)</span>
-                      </h4>
-                      <span className="cmp-time">10 Hour Ago</span>
-                    </div>
-                  </div>
-                  <div className="col-md-4 col-sm-4">
-                    <div className="mng-company-location">
-                      <p>
-                        <i className="fa fa-map-marker"></i> Street #210, Make
-                        New London
-                      </p>
-                    </div>
-                  </div>
-                  <div className="col-md-1 col-sm-1">
-                    <div className="mng-company-action">
-                      <a href="#" data-toggle="tooltip" title="Edit">
-                        <i className="fa fa-edit"></i>
-                      </a>
-                      <a href="#" data-toggle="tooltip" title="Delete">
-                        <i className="fa fa-trash-o"></i>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </article>
-
-              <article>
-                <div className="mng-company">
-                  <div className="col-md-2 col-sm-2">
-                    <div className="mng-company-pic">
-                      <img
-                        src="/assets/img/com-3.jpg"
-                        className="img-responsive"
-                        alt=""
-                      />
-                    </div>
-                  </div>
-                  <div className="col-md-5 col-sm-5">
-                    <div className="mng-company-name">
-                      <h4>
-                        Honda{" "}
-                        <span className="cmp-tagline">(Motor Agency)</span>
-                      </h4>
-                      <span className="cmp-time">10 Hour Ago</span>
-                    </div>
-                  </div>
-                  <div className="col-md-4 col-sm-4">
-                    <div className="mng-company-location">
-                      <p>
-                        <i className="fa fa-map-marker"></i> Street #210, Make
-                        New London
-                      </p>
-                    </div>
-                  </div>
-                  <div className="col-md-1 col-sm-1">
-                    <div className="mng-company-action">
-                      <a href="#" data-toggle="tooltip" title="Edit">
-                        <i className="fa fa-edit"></i>
-                      </a>
-                      <a href="#" data-toggle="tooltip" title="Delete">
-                        <i className="fa fa-trash-o"></i>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </article>
-
-              <article>
-                <div className="mng-company">
-                  <div className="col-md-2 col-sm-2">
-                    <div className="mng-company-pic">
-                      <img
-                        src="/assets/img/com-4.jpg"
-                        className="img-responsive"
-                        alt=""
-                      />
-                    </div>
-                  </div>
-                  <div className="col-md-5 col-sm-5">
-                    <div className="mng-company-name">
-                      <h4>
-                        Microsoft{" "}
-                        <span className="cmp-tagline">(Software Company)</span>
-                      </h4>
-                      <span className="cmp-time">10 Hour Ago</span>
-                    </div>
-                  </div>
-                  <div className="col-md-4 col-sm-4">
-                    <div className="mng-company-location">
-                      <p>
-                        <i className="fa fa-map-marker"></i> Street #210, Make
-                        New London
-                      </p>
-                    </div>
-                  </div>
-                  <div className="col-md-1 col-sm-1">
-                    <div className="mng-company-action">
-                      <a href="#" data-toggle="tooltip" title="Edit">
-                        <i className="fa fa-edit"></i>
-                      </a>
-                      <a href="#" data-toggle="tooltip" title="Delete">
-                        <i className="fa fa-trash-o"></i>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </article>
-
-              <article>
-                <div className="mng-company">
-                  <div className="col-md-2 col-sm-2">
-                    <div className="mng-company-pic">
-                      <img
-                        src="/assets/img/com-5.jpg"
-                        className="img-responsive"
-                        alt=""
-                      />
-                    </div>
-                  </div>
-                  <div className="col-md-5 col-sm-5">
-                    <div className="mng-company-name">
-                      <h4>
-                        Skype{" "}
-                        <span className="cmp-tagline">(Software Company)</span>
-                      </h4>
-                      <span className="cmp-time">10 Hour Ago</span>
-                    </div>
-                  </div>
-                  <div className="col-md-4 col-sm-4">
-                    <div className="mng-company-location">
-                      <p>
-                        <i className="fa fa-map-marker"></i> Street #210, Make
-                        New London
-                      </p>
-                    </div>
-                  </div>
-                  <div className="col-md-1 col-sm-1">
-                    <div className="mng-company-action">
-                      <a href="#" data-toggle="tooltip" title="Edit">
-                        <i className="fa fa-edit"></i>
-                      </a>
-                      <a href="#" data-toggle="tooltip" title="Delete">
-                        <i className="fa fa-trash-o"></i>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </article>
-
-              <article>
-                <div className="mng-company">
-                  <div className="col-md-2 col-sm-2">
-                    <div className="mng-company-pic">
-                      <img
-                        src="/assets/img/com-6.jpg"
-                        className="img-responsive"
-                        alt=""
-                      />
-                    </div>
-                  </div>
-                  <div className="col-md-5 col-sm-5">
-                    <div className="mng-company-name">
-                      <h4>
-                        Virtue{" "}
-                        <span className="cmp-tagline">
-                          (Development Company)
-                        </span>
-                      </h4>
-                      <span className="cmp-time">10 Hour Ago</span>
-                    </div>
-                  </div>
-                  <div className="col-md-4 col-sm-4">
-                    <div className="mng-company-location">
-                      <p>
-                        <i className="fa fa-map-marker"></i> Street #210, Make
-                        New London
-                      </p>
-                    </div>
-                  </div>
-                  <div className="col-md-1 col-sm-1">
-                    <div className="mng-company-action">
-                      <a href="#" data-toggle="tooltip" title="Edit">
-                        <i className="fa fa-edit"></i>
-                      </a>
-                      <a href="#" data-toggle="tooltip" title="Delete">
-                        <i className="fa fa-trash-o"></i>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </article>
-
-              <article>
-                <div className="mng-company">
-                  <div className="col-md-2 col-sm-2">
-                    <div className="mng-company-pic">
-                      <img
-                        src="/assets/img/com-7.jpg"
-                        className="img-responsive"
-                        alt=""
-                      />
-                    </div>
-                  </div>
-                  <div className="col-md-5 col-sm-5">
-                    <div className="mng-company-name">
-                      <h4>
-                        Twitter{" "}
-                        <span className="cmp-tagline">
-                          (Social Media Company)
-                        </span>
-                      </h4>
-                      <span className="cmp-time">10 Hour Ago</span>
-                    </div>
-                  </div>
-                  <div className="col-md-4 col-sm-4">
-                    <div className="mng-company-location">
-                      <p>
-                        <i className="fa fa-map-marker"></i> Street #210, Make
-                        New London
-                      </p>
-                    </div>
-                  </div>
-                  <div className="col-md-1 col-sm-1">
-                    <div className="mng-company-action">
-                      <a href="#" data-toggle="tooltip" title="Edit">
-                        <i className="fa fa-edit"></i>
-                      </a>
-                      <a href="#" data-toggle="tooltip" title="Delete">
-                        <i className="fa fa-trash-o"></i>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </article>
+                </article>
+              ))}
             </div>
           </div>
 

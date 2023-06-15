@@ -4,17 +4,16 @@ import Footer from "../shared/Footer";
 import { Navigate } from "react-router-dom";
 import { isAuth } from "../../services/shared/isAuth";
 import { isCompany } from "../../services/company/IsCompany";
-import { getOffre } from "./../../services/company/offer";
+import { getUserToCompany } from "../../services/company/GetUsersToCompany";
 function ApplicantManager() {
   const [data, setData] = useState([]);
   useEffect(() => {
-    getOffre()
+    getUserToCompany()
       .then((response) => {
         setData(response);
       })
       .catch((err) => console.log(err));
   }, []);
-  console.log(data);
   if (!isAuth() || !isCompany())
     return <Navigate to={"/company/login"} replace />;
 
@@ -43,46 +42,65 @@ function ApplicantManager() {
               }}
             >
               <h3>Jobs Requests to our company</h3>
-              {data.map((item, index) => (
-                <article key={index}>
-                  <div className="mng-company">
-                    <div className="col-md-2 col-sm-2">
-                      <div className="mng-company-pic">
-                        <img
-                          src={item.image}
-                          className="img-responsive"
-                          alt=""
-                        />
+              {data.map((item) => {
+                item.postules.map((user, index) => {
+                  return (
+                    <article key={index}>
+                      <div className="mng-company">
+                        <div className="col-md-2 col-sm-1">
+                          <img
+                            src={user.image}
+                            className="img-responsive"
+                            alt="image"
+                            style={{ width: "10em" }}
+                          />
+                        </div>
+                        <div className="col-md-2 col-sm-1">
+                          <div className="mng-company-location">
+                            <p style={{ fontWeight: "bolder" }}>{user.email}</p>
+                          </div>
+                        </div>
+                        <div className="col-md-2 col-sm-1">
+                          <div className="mng-company-location">
+                            <p style={{ fontWeight: "bold" }}>
+                              {user.telephone}
+                            </p>
+                          </div>
+                        </div>
+                        <div className="col-md-2 col-sm-1">
+                          <div className="mng-company-location">
+                            <p style={{ fontWeight: "bold" }}>{item.titre} </p>
+                          </div>
+                        </div>
+                        <div className="col-md-2 col-sm-1">
+                          <div className="mng-company-location">
+                            <p style={{ fontWeight: "bold" }}>
+                              {item.salaire + " $"}
+                            </p>
+                          </div>
+                        </div>
+                        <div className="col-md-1 col-sm-1">
+                          <div className="mng-company-location">
+                            <p style={{ fontWeight: "bold" }}>
+                              {item.experience} years
+                            </p>
+                          </div>
+                        </div>
+                        <div className="col-md-1 col-sm-1">
+                          <div className="mng-company-action">
+                            <a href="#" data-toggle="tooltip" title="Edit">
+                              <i className="fa fa-edit"></i>
+                            </a>
+                            <a href="#" data-toggle="tooltip" title="Delete">
+                              <i className="fa fa-trash-o"></i>
+                            </a>
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                    <div className="col-md-5 col-sm-5">
-                      <div className="mng-company-name">
-                        <h4>
-                          {item.titre}
-                          <span className="cmp-tagline">{item.experience}</span>
-                        </h4>
-                      </div>
-                    </div>
-                    <div className="col-md-4 col-sm-4">
-                      <div className="mng-company-location">
-                        <p>
-                          <i className="fa fa-map-marker"></i> {item.address}
-                        </p>
-                      </div>
-                    </div>
-                    <div className="col-md-1 col-sm-1">
-                      <div className="mng-company-action">
-                        <a href="#" data-toggle="tooltip" title="Edit">
-                          <i className="fa fa-edit"></i>
-                        </a>
-                        <a href="#" data-toggle="tooltip" title="Delete">
-                          <i className="fa fa-trash-o"></i>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </article>
-              ))}
+                    </article>
+                  );
+                });
+              })}
             </div>
           </div>
         </div>
