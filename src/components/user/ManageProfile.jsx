@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { getUsers } from "../../services/user/getUsers";
 import { isUser } from "../../services/user/IsUser";
 import { isAuth } from "../../services/shared/isAuth";
@@ -15,34 +15,12 @@ function ManageProfile() {
       .catch((err) => console.log(err));
     console.log(data);
   }, []);
+
+  const handleUpdate = () => {
+    console.log();
+  };
+
   if (!isAuth() || !isUser()) return <Navigate to={"/user/login"} replace />;
-
-
-
- const handleUpdate = () => {
-   userUpdate(
-     data.username,
-     data.lastname,
-     data.firstname,
-     data.password,
-     data.email,
-     data.address,
-     data.age,
-     data.phone,
-     data.image,
-     data.cv,
-     data.cover
-   )
-     .then((response) => {
-       console.log("Profile updated successfully", response);
-       // Perform any necessary actions after successful update
-     })
-     .catch((err) => {
-       console.error("Error updating profile", err);
-       // Handle the error or show an error message
-     });
- };
-
 
   return (
     <div>
