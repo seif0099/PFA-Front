@@ -1,4 +1,5 @@
 import axios from "axios";
+import Cookies from "js-cookie";
 const baseURL = "http://127.0.0.1:8000/api";
 export const userUpdate = (
   username,
@@ -27,8 +28,14 @@ export const userUpdate = (
     formData.append("email", email);
     formData.append("password", password);
     axios
-      .put(`${baseURL}/userupdate`, formData)
-      .then((response) => res(response.data))
-      .catch((err) => rej(err));
+      .put(`${baseURL}/user`, formData, {
+    headers: {
+      Authorization: Cookies.get("jwt"),
+    },
+  })
+  .then((response) => res(response.data))
+  .catch((err) => rej(err));
+    
+    
   });
 };

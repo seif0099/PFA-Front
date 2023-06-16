@@ -17,6 +17,33 @@ function ManageProfile() {
   }, []);
   if (!isAuth() || !isUser()) return <Navigate to={"/user/login"} replace />;
 
+
+
+ const handleUpdate = () => {
+   userUpdate(
+     data.username,
+     data.lastname,
+     data.firstname,
+     data.password,
+     data.email,
+     data.address,
+     data.age,
+     data.phone,
+     data.image,
+     data.cv,
+     data.cover
+   )
+     .then((response) => {
+       console.log("Profile updated successfully", response);
+       // Perform any necessary actions after successful update
+     })
+     .catch((err) => {
+       console.error("Error updating profile", err);
+       // Handle the error or show an error message
+     });
+ };
+
+
   return (
     <div>
       <div className="clearfix"></div>
@@ -41,7 +68,6 @@ function ManageProfile() {
                   <i className="fa fa-pencil"></i>
                 </a>
               </div>
-           
             </div>
 
             <div className="row bottom-mrg">
@@ -91,9 +117,7 @@ function ManageProfile() {
                         placeholder={data.adresse}
                       />
                     </div>
-                   
-                 
-             
+
                     <div class="col-md-4 col-sm-6">
                       <label>Old Password</label>
                       <input
@@ -110,10 +134,13 @@ function ManageProfile() {
                         placeholder="*********"
                       />
                     </div>
-                
-                  
+
                     <div class="col-sm-12">
-                      <button type="button" class="update-btn" onClick={userUpdate}>
+                      <button
+                        type="button"
+                        class="update-btn"
+                        onClick={handleUpdate}
+                      >
                         Update Now
                       </button>
                     </div>
