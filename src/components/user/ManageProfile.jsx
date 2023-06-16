@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { getUsers } from "../../services/user/getUsers";
 import { isUser } from "../../services/user/IsUser";
 import { isAuth } from "../../services/shared/isAuth";
@@ -6,43 +6,64 @@ import { Navigate } from "react-router";
 import { userUpdate } from "../../services/user/updateProfie";
 
 function ManageProfile() {
-  const [data, setData] = useState([]);
+  const handleuploadImage = (e) => {
+    setImage(e.target.files[0]);
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.onload = () => {
+      setImage(reader.result);
+    };
+
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+  };
+  const [firstName, setFirstName] = useState("");
+  const [image, setImage] = useState("");
+
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [telephone, setTelephone] = useState("");
+  const [adresse, setAdresse] = useState("");
+  const [age, setAge] = useState("");
+  const uploadImg = useRef(null);
+
   useEffect(() => {
     getUsers()
       .then((response) => {
-        setData(response);
+        setFirstName(response.prenom);
+        setLastName(response.nom);
+        setEmail(response.email);
+        setTelephone(response.telephone);
+        setAdresse(response.adresse);
+        setPassword(response.password);
+        setImage(response.image);
       })
       .catch((err) => console.log(err));
-    console.log(data);
   }, []);
+
   if (!isAuth() || !isUser()) return <Navigate to={"/user/login"} replace />;
 
-
-
- const handleUpdate = () => {
-   userUpdate(
-     data.username,
-     data.lastname,
-     data.firstname,
-     data.password,
-     data.email,
-     data.address,
-     data.age,
-     data.phone,
-     data.image,
-     data.cv,
-     data.cover
-   )
-     .then((response) => {
-       console.log("Profile updated successfully", response);
-       // Perform any necessary actions after successful update
-     })
-     .catch((err) => {
-       console.error("Error updating profile", err);
-       // Handle the error or show an error message
-     });
- };
-
+  const handleUpdate = (e) => {
+    e.preventDefault();
+    userUpdate(
+      lastName,
+      firstName,
+      password,
+      email,
+      adresse,
+      age,
+      telephone,
+      image
+    )
+      .then((response) => {
+        console.log("Profile updated successfully", response);
+      })
+      .catch((err) => {
+        console.error("Error updating profile", err);
+      });
+  };
 
   return (
     <div>
@@ -58,13 +79,25 @@ function ManageProfile() {
       </section>
       <div className="clearfix"></div>
 
-      {data && (
+      {
         <section className="detail-desc advance-detail-pr gray-bg">
           <div className="container white-shadow">
             <div className="row">
               <div className="detail-pic">
-                <img src={data.image} className="img" alt="" />
-                <a href="#" className="detail-edit" title="edit">
+                <img src={image} className="img" alt="" />
+                <input
+                  type="file"
+                  ref={uploadImg}
+                  id="fileInput"
+                  style={{ display: "none" }}
+                  onChange={handleuploadImage}
+                />
+                <a
+                  href="#"
+                  className="detail-edit"
+                  title="edit"
+                  onClick={() => uploadImg.current.click()}
+                >
                   <i className="fa fa-pencil"></i>
                 </a>
               </div>
@@ -74,14 +107,15 @@ function ManageProfile() {
               <div className="col-md-12 col-sm-12">
                 <div className="advance-detail detail-desc-caption">
                   <h4>Info</h4>
-                  <span className="designation">{data.usernamer}</span>
+                  <span className="designation"></span>
                   <div class="edit-pro">
                     <div class="col-md-4 col-sm-6">
                       <label>First Name</label>
                       <input
                         type="text"
                         class="form-control"
-                        placeholder={data.prenom}
+                        value={firstName}
+                        onChange={(e) => setFirstName(e.target.value)}
                       />
                     </div>
                     <div class="col-md-4 col-sm-6">
@@ -89,7 +123,8 @@ function ManageProfile() {
                       <input
                         type="text"
                         class="form-control"
-                        placeholder={data.nom}
+                        value={lastName}
+                        onChange={(e) => setLastName(e.target.value)}
                       />
                     </div>
 
@@ -98,7 +133,8 @@ function ManageProfile() {
                       <input
                         type="email"
                         class="form-control"
-                        placeholder={data.email}
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                       />
                     </div>
                     <div class="col-md-4 col-sm-6">
@@ -106,7 +142,8 @@ function ManageProfile() {
                       <input
                         type="text"
                         class="form-control"
-                        placeholder={data.telephone}
+                        value={telephone}
+                        onChange={(e) => setTelephone(e.target.value)}
                       />
                     </div>
                     <div class="col-md-4 col-sm-6">
@@ -114,24 +151,22 @@ function ManageProfile() {
                       <input
                         type="text"
                         class="form-control"
-                        placeholder={data.adresse}
+                        value={adresse}
+                        onChange={(e) => setAdresse(e.target.value)}
                       />
                     </div>
 
                     <div class="col-md-4 col-sm-6">
                       <label>Old Password</label>
-                      <input
-                        type="password"
-                        class="form-control"
-                        placeholder={data.password}
-                      />
+                      <input type="password" class="form-control" />
                     </div>
                     <div class="col-md-4 col-sm-6">
                       <label>New Password</label>
                       <input
                         type="password"
                         class="form-control"
-                        placeholder="*********"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
                       />
                     </div>
 
@@ -184,7 +219,7 @@ function ManageProfile() {
             </div>
           </div>
         </section>
-      )}
+      }
     </div>
   );
 }
