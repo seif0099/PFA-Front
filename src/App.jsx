@@ -19,6 +19,7 @@ import MainContainer from "./components/shared/MainContainer";
 import SearchJob from "./components/user/SearchJob";
 import CreateOffer from "./components/offer/CreateOffer";
 import ApplicantManager from "./components/company/ApplicantManager";
+import ManageProfile from "./components/user/ManageProfile";
 
 const App = () => (
   <BrowserRouter>
@@ -39,6 +40,7 @@ const App = () => (
         <Route path="forgetpass" element={<UserForgetPassword />} />
         <Route path="home" element={<UserHome />} />
         <Route path="resetPass" element={<UserResetPass />} />
+        <Route path="editprofile" element={<ManageProfile />} />
       </Route>
 
       <Route path="company">

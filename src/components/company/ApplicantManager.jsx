@@ -110,6 +110,7 @@ function ApplicantManager() {
       </section>
       <Footer />
     </div>
+    
   );
 }
 
