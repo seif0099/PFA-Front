@@ -1,11 +1,21 @@
 import React from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate, useLocation } from "react-router-dom";
 import { logout } from "../../services/shared/Logout";
 function HomeNavbar() {
   const Logout = () => {
     logout();
     return true;
   };
+  const currentLocation1 = useLocation();
+  const shouldDisplayHomeButton = currentLocation1.pathname !== "/user/home";
+
+  const currentLocation3 = useLocation();
+  const shouldDisplayProfileButton =
+    currentLocation3.pathname !== "/user/editprofile";
+
+  const currentLocation2 = useLocation();
+  const shouldDisplayApplicantButton =
+    currentLocation2.pathname !== "/company/applicant";
   return (
     <div>
       <nav className="navbar navbar-default navbar-fixed navbar-transparent white bootsnav">
@@ -51,16 +61,30 @@ function HomeNavbar() {
                 </Link>
                 {Logout && <Navigate to={""} />}
               </li>
-              <li>
-                <Link
-                  to={"/user/editprofile"}
-                  style={{ right: "-138vh", top: "-6vh", color: "white" }}
-                  className="signin"
-                >
-                  <i className="bi bi-briefcase-fill"></i>
-                  Edit Profile
-                </Link>
-              </li>
+              {shouldDisplayProfileButton && (
+                <li>
+                  <Link
+                    to={"/user/editprofile"}
+                    style={{ right: "-138vh", top: "-6vh", color: "white" }}
+                    className="signin"
+                  >
+                    <i className="bi bi-briefcase-fill"></i>
+                    Edit Profile
+                  </Link>
+                </li>
+              )}
+              {shouldDisplayHomeButton && (
+                <li>
+                  <Link
+                    to={"/user/home"}
+                    style={{ right: "-138vh", top: "-6vh", color: "white" }}
+                    className="signin"
+                  >
+                    <i className="bi bi-briefcase-fill"></i>
+                    Home
+                  </Link>
+                </li>
+              )}
             </ul>
             <ul
               className="nav navbar-nav navbar-right"

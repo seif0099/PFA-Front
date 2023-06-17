@@ -1,11 +1,23 @@
 import React from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate, useLocation } from "react-router-dom";
 import { logout } from "../../services/shared/Logout";
+import ManageProfile from "./../user/ManageProfile";
 function CompanyNavbar() {
   const Logout = () => {
     logout();
     return true;
   };
+  const currentLocation1 = useLocation();
+  const shouldDisplayHomeButton = currentLocation1.pathname !== "/company/home";
+
+  const currentLocation3 = useLocation();
+  const shouldDisplayProfileButton =
+    currentLocation3.pathname !== "/company/editprofileCompany";
+
+  const currentLocation2 = useLocation();
+  const shouldDisplayApplicantButton =
+    currentLocation2.pathname !== "/company/applicant";
+
   return (
     <div>
       <nav className="navbar navbar-default navbar-fixed navbar-transparent white bootsnav">
@@ -51,16 +63,42 @@ function CompanyNavbar() {
                 </Link>
                 {Logout && <Navigate to={""} />}
               </li>
-              <li>
-                <Link
-                  to={"/company/applicant"}
-                  style={{ right: "-138vh", top: "-6vh", color: "white" }}
-                  className="signin"
-                >
-                  <i className="bi bi-briefcase-fill"></i>
-                  The applicants
-                </Link>
-              </li>
+              {shouldDisplayApplicantButton && (
+                <li>
+                  <Link
+                    to={"/company/applicant"}
+                    style={{ right: "-138vh", top: "-6vh", color: "white" }}
+                    className="signin"
+                  >
+                    <i className="bi bi-briefcase-fill"></i>
+                    The applicants
+                  </Link>
+                </li>
+              )}
+              {shouldDisplayHomeButton && (
+                <li>
+                  <Link
+                    to={"/company/home"}
+                    style={{ right: "-138vh", top: "-6vh", color: "white" }}
+                    className="signin"
+                  >
+                    <i className="bi bi-briefcase-fill"></i>
+                    Home
+                  </Link>
+                </li>
+              )}
+              {shouldDisplayProfileButton && (
+                <li>
+                  <Link
+                    to={"/company/editprofileCompany"}
+                    style={{ right: "-138vh", top: "-6vh", color: "white" }}
+                    className="signin"
+                  >
+                    <i className="bi bi-briefcase-fill"></i>
+                    Edit Profile
+                  </Link>
+                </li>
+              )}
             </ul>
             <ul
               className="nav navbar-nav navbar-right"
