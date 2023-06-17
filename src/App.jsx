@@ -22,6 +22,7 @@ import ApplicantManager from "./components/company/ApplicantManager";
 import ManageProfile from "./components/user/ManageProfile";
 import UserInfo from "./components/company/UserInfo";
 import CompanyProfile from "./components/company/CompanyProfile";
+import JobInfo from "./components/user/JobInfo";
 
 
 const App = () => (
@@ -44,6 +45,7 @@ const App = () => (
         <Route path="home" element={<UserHome />} />
         <Route path="resetPass" element={<UserResetPass />} />
         <Route path="editprofile" element={<ManageProfile />} />
+        <Route path="JobInfo" element={<JobInfo />} />
       </Route>
 
       <Route path="company">
