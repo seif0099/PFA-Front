@@ -21,6 +21,7 @@ import CreateOffer from "./components/offer/CreateOffer";
 import ApplicantManager from "./components/company/ApplicantManager";
 import ManageProfile from "./components/user/ManageProfile";
 import UserInfoModal from './components/company/UserInfoModal';
+import CompanyProfile from "./components/company/CompanyProfile";
 
 const App = () => (
   <BrowserRouter>
@@ -53,6 +54,7 @@ const App = () => (
         <Route path="resetPass" element={<CompanyResetPass />} />
         <Route path="createoffer" element={<CreateOffer />} />
         <Route path="applicant" element={<ApplicantManager />} />
+        <Route path="editprofileCompany" element={<CompanyProfile />} />
       </Route>
 
       <Route path="*" element={<NotFound />} />

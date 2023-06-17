@@ -1,37 +1,37 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 const baseURL = "http://127.0.0.1:8000/api";
-export const userUpdate = (
-  lastname,
-  firstname,
+export const companyUpdate = (
+  companyName,
+  description,
   password,
   email,
   adresse,
-  age,
+  code,
   telephone,
   image
 ) => {
   return new Promise((res, rej) => {
     const formData = new FormData();
-    formData.append("nom", lastname);
-    formData.append("prenom", firstname);
+    formData.append("nomEntreprise", companyName);
+    formData.append("description", description);
     formData.append("password", password);
     formData.append("email", email);
-
     formData.append("adresse", adresse);
-    formData.append("age", age);
+    formData.append("codeEntreprise", code);
     formData.append("telephone", telephone);
 
+    console.log(typeof image);
     if (typeof image != "string") {
       formData.append("image", image);
     }
 
     console.log(image);
+    console.log(formData);
     axios
-      .put(`${baseURL}/user`, formData, {
+      .put(`${baseURL}/company`, formData, {
         headers: {
           "Content-Type": "multipart/formdata",
-
           Authorization: Cookies.get("jwt"),
         },
       })
