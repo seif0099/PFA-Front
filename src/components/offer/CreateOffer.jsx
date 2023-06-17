@@ -5,7 +5,9 @@ import { Navigate } from "react-router-dom";
 import { isAuth } from "../../services/shared/isAuth";
 import { isCompany } from "../../services/company/IsCompany";
 import { addJob } from "../../services/offer/AddJob";
+import { useNavigate } from "react-router-dom";
 function CreateOffer() {
+  const navigate = useNavigate();
   const handleExperience = (e) => {
     const value = e.target.value;
     if (!isNaN(value)) setExpreience(value);
@@ -19,7 +21,10 @@ function CreateOffer() {
   const handleSubmit = (e) => {
     e.preventDefault();
     addJob(title, salaire, description, type, experience, adresse, deadLine)
-      .then((response) => console.log(response))
+      .then((response) => {
+        console.log(response);
+        navigate("/company/home");
+      })
       .catch((err) => console.log(err));
   };
   const [title, setTitle] = useState(null);

@@ -5,7 +5,17 @@ import CompanyNavbar from "./CompanyNavbar";
 import { isAuth } from "../../services/shared/isAuth";
 import { isCompany } from "../../services/company/IsCompany";
 import { getOffre } from "./../../services/company/offer";
+import { deleteOffer } from "../../services/company/DeleteOffer";
 const CompanyHome = () => {
+  const [render, setRender] = useState(false);
+  const DeleteOffer = (id) => {
+    deleteOffer(id)
+      .then((response) => {
+        setRender(!render);
+        console.log(response);
+      })
+      .catch((err) => console.log(err));
+  };
   const [data, setData] = useState([]);
   useEffect(() => {
     getOffre()
@@ -13,7 +23,7 @@ const CompanyHome = () => {
         setData(response);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [render]);
   if (!isAuth() || !isCompany())
     return <Navigate to={"/company/login"} replace />;
 
@@ -108,10 +118,12 @@ const CompanyHome = () => {
                     </div>
                     <div className="col-md-1 col-sm-1">
                       <div className="mng-company-action">
-                        <a href="#" data-toggle="tooltip" title="Edit">
-                          <i className="fa fa-edit"></i>
-                        </a>
-                        <a href="#" data-toggle="tooltip" title="Delete">
+                        <a
+                          href="#"
+                          data-toggle="tooltip"
+                          title="Delete"
+                          onClick={() => DeleteOffer(item.id)}
+                        >
                           <i className="fa fa-trash-o"></i>
                         </a>
                       </div>
@@ -120,34 +132,6 @@ const CompanyHome = () => {
                 </article>
               ))}
             </div>
-          </div>
-
-          <div className="row">
-            <ul className="pagination">
-              <li>
-                <a href="#">&laquo;</a>
-              </li>
-              <li className="active">
-                <a href="#">1</a>
-              </li>
-              <li>
-                <a href="#">2</a>
-              </li>
-              <li>
-                <a href="#">3</a>
-              </li>
-              <li>
-                <a href="#">4</a>
-              </li>
-              <li>
-                <a href="#">
-                  <i className="fa fa-ellipsis-h"></i>
-                </a>
-              </li>
-              <li>
-                <a href="#">&raquo;</a>
-              </li>
-            </ul>
           </div>
         </div>
       </section>
