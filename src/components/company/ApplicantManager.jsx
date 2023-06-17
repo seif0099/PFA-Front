@@ -7,7 +7,6 @@ import { accept, refuse } from "../../services/company/manageAcceptation";
 import { getUserById } from "../../services/user/getUsers";
 function ApplicantManager() {
   const [accepted, setAccepted] = useState(null);
-  const [user, setUser] = useState({});
   const navigate = useNavigate();
   const handleClick = (id) => {
     getUserById(id)
