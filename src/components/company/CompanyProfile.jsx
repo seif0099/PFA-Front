@@ -5,6 +5,7 @@ import { Navigate } from "react-router";
 import { companyUpdate } from "../../services/company/updateCompany";
 import { getCompanyInfo } from "../../services/company/getCompanyInfo";
 import { isCompany } from "../../services/company/IsCompany";
+import CompanyNavbar from "./CompanyNavbar";
 
 function CompanyProfile() {
   const handleuploadImage = (e) => {
@@ -60,6 +61,7 @@ function CompanyProfile() {
 
   return (
     <div>
+        <CompanyNavbar/>
       <div className="clearfix"></div>
 
       <section

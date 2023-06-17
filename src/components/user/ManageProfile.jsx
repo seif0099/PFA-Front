@@ -4,6 +4,7 @@ import { isUser } from "../../services/user/IsUser";
 import { isAuth } from "../../services/shared/isAuth";
 import { Navigate } from "react-router";
 import { userUpdate } from "../../services/user/updateProfie";
+import HomeNavbar from "./HomeNavbar";
 
 function ManageProfile() {
   const handleuploadImage = (e) => {
@@ -59,6 +60,7 @@ function ManageProfile() {
 
   return (
     <div>
+      <HomeNavbar/>
       <div className="clearfix"></div>
       
 
