@@ -1,27 +1,23 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import CompanyNavbar from "./CompanyNavbar";
 import Footer from "../shared/Footer";
-import { Navigate } from "react-router-dom";
-import { isAuth } from "../../services/shared/isAuth";
-import { isCompany } from "../../services/company/IsCompany";
 import { getUserToCompany } from "../../services/company/GetUsersToCompany";
 import { accept, refuse } from "../../services/company/manageAcceptation";
-import UserInfoModal from "./UserInfoModal";
 import { getUserById } from "../../services/user/getUsers";
 function ApplicantManager() {
   const [accepted, setAccepted] = useState(null);
-  const [showModal, setShowModal] = useState(false);
   const [user, setUser] = useState({});
-
+  const navigate = useNavigate();
   const handleClick = (id) => {
-    setShowModal(true);
     getUserById(id)
-      .then((response) => setUser(response))
+      .then((response) =>
+        navigate("/company/userInfo", {
+          state: response,
+          replace: true,
+        })
+      )
       .catch((err) => console.log(err));
-  };
-
-  const closeModal = () => {
-    setShowModal(false);
   };
 
   const acceptPost = (offre, user) => {
@@ -49,8 +45,6 @@ function ApplicantManager() {
       })
       .catch((err) => console.log(err));
   }, [accepted]);
-  //  if (!isAuth() || !isCompany())
-  //    return <Navigate to={"/company/login"} replace />;
 
   return (
     <div>
@@ -160,11 +154,6 @@ function ApplicantManager() {
                       </div>
                     </div>
                   </article>
-                  <UserInfoModal
-                    showModal={showModal}
-                    closeModal={closeModal}
-                    user={user}
-                  />
                 </>
               ))}
             </div>
