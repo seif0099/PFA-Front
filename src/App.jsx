@@ -24,7 +24,6 @@ import UserInfo from "./components/company/UserInfo";
 import CompanyProfile from "./components/company/CompanyProfile";
 import JobInfo from "./components/user/JobInfo";
 
-
 const App = () => (
   <BrowserRouter>
     <Routes>
@@ -45,7 +44,7 @@ const App = () => (
         <Route path="home" element={<UserHome />} />
         <Route path="resetPass" element={<UserResetPass />} />
         <Route path="editprofile" element={<ManageProfile />} />
-        <Route path="JobInfo" element={<JobInfo />} />
+        <Route path="jobInfo" element={<JobInfo />} />
       </Route>
 
       <Route path="company">

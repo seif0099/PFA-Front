@@ -1,26 +1,18 @@
 import React, { useEffect, useRef, useState } from "react";
-import { getUsers } from "../../services/user/getUsers";
-import { isUser } from "../../services/user/IsUser";
-import { isAuth } from "../../services/shared/isAuth";
-import { Navigate } from "react-router";
-import { userUpdate } from "../../services/user/updateProfie";
 import HomeNavbar from "./HomeNavbar";
 import Footer from "../shared/Footer";
-
+import { useLocation, Navigate } from "react-router-dom";
 function JobInfo() {
-  const [title, setJobTitle] = useState("");
-  const [salaire, setSalaire] = useState("");
-    const [experience, setExperience] = useState("");
-  const [adresse, setAdresse] = useState("");
-    const [image, setImage] = useState("");
+  const location = useLocation();
+  const { state } = location;
+  const [job, setJob] = useState(state);
 
-
-
-
-//   if (!isAuth() || !isUser()) return <Navigate to={"/user/login"} replace />;
-
+  if (!job) {
+    return <Navigate to={"/user/home"} replace />;
+  }
   return (
     <div>
+      {console.log(job)}
       <HomeNavbar />
       <div className="clearfix"></div>
 
@@ -37,26 +29,11 @@ function JobInfo() {
       {
         <section className="detail-desc advance-detail-pr gray-bg">
           <div className="container white-shadow">
-             <div className="row">
+            <div className="row">
               <div className="detail-pic">
-                <img src="" className="img" alt="" />
-                <input
-                  type="file"
-                //   ref={uploadImg}
-                  id="fileInput"
-                  style={{ display: "none" }}
-                //   onChange={handleuploadImage}
-                />
-                <a
-                  href="#"
-                  className="detail-edit"
-                  title="edit"
-                //   onClick={() => uploadImg.current.click()}
-                >
-                  <i className="fa fa-pencil"></i>
-                </a>
+                <img src={job.image} className="img" alt="" />
               </div>
-            </div> 
+            </div>
 
             <div className="row bottom-mrg">
               <div className="col-md-12 col-sm-12">
@@ -69,7 +46,7 @@ function JobInfo() {
                       <input
                         type="text"
                         class="form-control"
-                        value={title}
+                        value={job.titre}
                         disabled
                       />
                     </div>
@@ -78,7 +55,7 @@ function JobInfo() {
                       <input
                         type="text"
                         class="form-control"
-                        value={experience}
+                        value={job.experience}
                         disabled
                       />
                     </div>
@@ -88,7 +65,7 @@ function JobInfo() {
                       <input
                         type="email"
                         class="form-control"
-                        value={salaire}
+                        value={job.salaire}
                         disabled
                       />
                     </div>
@@ -98,63 +75,18 @@ function JobInfo() {
                       <input
                         type="text"
                         class="form-control"
-                        value={adresse}
+                        value={job.adresse}
                         disabled
                       />
                     </div>
-
-
-                    <div class="col-sm-12">
-                      <button
-                        type="button"
-                        class="update-btn"
-                        // onClick={handleUpdate}
-                      >
-                        Submit
-                      </button>
-                    </div>
                   </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="row no-padd">
-              <div className="detail pannel-footer">
-                <div className="col-md-5 col-sm-5">
-                  <ul className="detail-footer-social">
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-facebook"></i>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-google-plus"></i>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-twitter"></i>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-linkedin"></i>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-instagram"></i>
-                      </a>
-                    </li>
-                  </ul>
                 </div>
               </div>
             </div>
           </div>
         </section>
       }
-      <Footer/>
+      <Footer />
     </div>
   );
 }

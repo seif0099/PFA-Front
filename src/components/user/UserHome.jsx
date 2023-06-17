@@ -1,16 +1,27 @@
 import React, { useEffect, useRef, useState } from "react";
 import { isUser } from "../../services/user/IsUser";
 import { isAuth } from "../../services/shared/isAuth";
-import { Navigate,useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import Footer from "../shared/Footer";
 import HomeNavbar from "./HomeNavbar";
 import { getAllJob } from "../../services/user/getAllJob";
+import { getJobById } from "../../services/user/getJobById";
 const UserHome = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const searchField = useRef(searchQuery);
   const [data, setData] = useState([]);
   const [filtredData, setFiltedData] = useState([]);
   const navigate = useNavigate();
+  const handleClickedJob = (id) => {
+    getJobById(id)
+      .then((response) => {
+        navigate("/user/jobInfo", {
+          replace: true,
+          state: response,
+        });
+      })
+      .catch((err) => console.log(err));
+  };
   useEffect(() => {
     getAllJob()
       .then((response) => {
@@ -30,10 +41,9 @@ const UserHome = () => {
   const handleSearch = (e) => {
     setSearchQuery(e.target.value);
   };
-  const handleClick=()=>{
-
- navigate("/user/JobInfo") 
- }
+  const handleClick = () => {
+    navigate("/user/JobInfo");
+  };
 
   if (!isAuth() || !isUser()) return <Navigate to={"/user/login"} replace />;
 
@@ -83,7 +93,10 @@ const UserHome = () => {
 
               <div className="card-body">
                 {filtredData.map((item, index) => (
-                  <article key={index} onClick={() => handleClick()}>
+                  <article
+                    key={index}
+                    onClick={() => handleClickedJob(item.id)}
+                  >
                     <div className="mng-company">
                       <div className="col-md-2 col-sm-1">
                         <img
@@ -134,34 +147,6 @@ const UserHome = () => {
                   </article>
                 ))}
               </div>
-            </div>
-
-            <div className="row">
-              <ul className="pagination">
-                <li>
-                  <a href="#">&laquo;</a>
-                </li>
-                <li className="active">
-                  <a href="#">1</a>
-                </li>
-                <li>
-                  <a href="#">2</a>
-                </li>
-                <li>
-                  <a href="#">3</a>
-                </li>
-                <li>
-                  <a href="#">4</a>
-                </li>
-                <li>
-                  <a href="#">
-                    <i className="fa fa-ellipsis-h"></i>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">&raquo;</a>
-                </li>
-              </ul>
             </div>
           </div>
         </div>
