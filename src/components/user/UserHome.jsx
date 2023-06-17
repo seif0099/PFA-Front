@@ -1,32 +1,33 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { isUser } from "../../services/user/IsUser";
 import { isAuth } from "../../services/shared/isAuth";
 import { Navigate } from "react-router-dom";
 import Footer from "../shared/Footer";
-import Navbar from "../shared/Navbar";
-import { getOffre } from "../../services/company/offer";
 import HomeNavbar from "./HomeNavbar";
-import { getJobByName } from "../../services/user/getJobByName";
 import { getAllJob } from "../../services/user/getAllJob";
 const UserHome = () => {
   const [searchQuery, setSearchQuery] = useState("");
+  const searchField = useRef(searchQuery);
   const [data, setData] = useState([]);
+  const [filtredData, setFiltedData] = useState([]);
   useEffect(() => {
     getAllJob()
       .then((response) => {
         setData(response);
-        console.log("aaaaaaaaaaaa");
       })
       .catch((err) => console.log(err));
   }, []);
-
+  useEffect(() => {
+    const currentValue = searchField.current.value;
+    const filtred = data.filter(
+      (item) =>
+        item.titre.toLowerCase().startsWith(currentValue.toLowerCase()) ||
+        item.typee.toLowerCase().startsWith(currentValue.toLowerCase())
+    );
+    setFiltedData(filtred);
+  }, [data, searchQuery]);
   const handleSearch = (e) => {
-    e.preventDefault();
-    getJobByName(searchQuery)
-      .then(() => {
-        console.log(searchQuery);
-      })
-      .catch((err) => console.log(err));
+    setSearchQuery(e.target.value);
   };
 
   if (!isAuth() || !isUser()) return <Navigate to={"/user/login"} replace />;
@@ -51,26 +52,16 @@ const UserHome = () => {
       <div className="clearfix"></div>
       <section className="bottom-search-form">
         <div className="container">
-          <form className="bt-form" onSubmit={handleSearch}>
+          <form className="bt-form">
             <div className="col-md-3 col-sm-6">
               <input
                 type="text"
+                ref={searchField}
                 className="form-control"
-                placeholder="Job Title"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Job Title Or Type"
+                style={{ color: "White" }}
+                onChange={handleSearch}
               />
-            </div>
-
-            <div className="col-md-3 col-sm-6">
-              <button
-                type="submit"
-                className="btn btn-primary"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-              >
-                Search Job
-              </button>
             </div>
           </form>
         </div>
@@ -86,7 +77,7 @@ const UserHome = () => {
               </div>
 
               <div className="card-body">
-                {data.map((item, index) => (
+                {filtredData.map((item, index) => (
                   <article key={index}>
                     <div className="mng-company">
                       <div className="col-md-2 col-sm-1">
@@ -166,16 +157,6 @@ const UserHome = () => {
                   <a href="#">&raquo;</a>
                 </li>
               </ul>
-            </div>
-
-            <div className="row">
-              <div className="ad-banner">
-                <img
-                  src="http://via.placeholder.com/728x90"
-                  className="img-responsive"
-                  alt=""
-                />
-              </div>
             </div>
           </div>
         </div>
