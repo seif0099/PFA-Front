@@ -8,18 +8,10 @@ import { userUpdate } from "../../services/user/updateProfie";
 function ManageProfile() {
   const handleuploadImage = (e) => {
     setImage(e.target.files[0]);
-    const file = e.target.files[0];
-    const reader = new FileReader();
-    reader.onload = () => {
-      setImage(reader.result);
-    };
-
-    if (file) {
-      reader.readAsDataURL(file);
-    }
+  
   };
   const [firstName, setFirstName] = useState("");
-  const [image, setImage] = useState("");
+  const [image, setImage] = useState(null);
 
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -46,7 +38,7 @@ function ManageProfile() {
   if (!isAuth() || !isUser()) return <Navigate to={"/user/login"} replace />;
 
   const handleUpdate = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     userUpdate(
       lastName,
       firstName,
@@ -68,6 +60,7 @@ function ManageProfile() {
   return (
     <div>
       <div className="clearfix"></div>
+      
 
       <section
         className="inner-header-title"

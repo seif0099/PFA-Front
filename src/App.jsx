@@ -20,6 +20,7 @@ import SearchJob from "./components/user/SearchJob";
 import CreateOffer from "./components/offer/CreateOffer";
 import ApplicantManager from "./components/company/ApplicantManager";
 import ManageProfile from "./components/user/ManageProfile";
+import UserInfoModal from './components/company/UserInfoModal';
 
 const App = () => (
   <BrowserRouter>

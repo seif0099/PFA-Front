@@ -5,21 +5,35 @@ import { Navigate } from "react-router-dom";
 import Footer from "../shared/Footer";
 import Navbar from "../shared/Navbar";
 import { getOffre } from "../../services/company/offer";
+import HomeNavbar from "./HomeNavbar";
+import { getJobByName } from "../../services/user/getJobByName";
+import { getAllJob } from "../../services/user/getAllJob";
 const UserHome = () => {
+  const [searchQuery, setSearchQuery] = useState("");
   const [data, setData] = useState([]);
   useEffect(() => {
-    getOffre()
+    getAllJob()
       .then((response) => {
         setData(response);
+        console.log("aaaaaaaaaaaa");
       })
       .catch((err) => console.log(err));
   }, []);
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    getJobByName(searchQuery)
+      .then(() => {
+        console.log(searchQuery);
+      })
+      .catch((err) => console.log(err));
+  };
 
   if (!isAuth() || !isUser()) return <Navigate to={"/user/login"} replace />;
 
   return (
     <div>
-      <Navbar />
+      <HomeNavbar />
       <div className="clearfix"></div>
       <section
         className="inner-header-title no-br advance-header-title"
@@ -37,17 +51,24 @@ const UserHome = () => {
       <div className="clearfix"></div>
       <section className="bottom-search-form">
         <div className="container">
-          <form className="bt-form">
+          <form className="bt-form" onSubmit={handleSearch}>
             <div className="col-md-3 col-sm-6">
               <input
                 type="text"
                 className="form-control"
                 placeholder="Job Title"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
               />
             </div>
 
             <div className="col-md-3 col-sm-6">
-              <button type="submit" className="btn btn-primary">
+              <button
+                type="submit"
+                className="btn btn-primary"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              >
                 Search Job
               </button>
             </div>
