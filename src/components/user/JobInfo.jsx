@@ -3,6 +3,8 @@ import HomeNavbar from "./HomeNavbar";
 import Footer from "../shared/Footer";
 import { useLocation, Navigate, useNavigate } from "react-router-dom";
 import { apply } from "../../services/offer/ApplyToOffer";
+import { isUser } from "../../services/user/IsUser";
+import { isAuth } from "../../services/shared/isAuth";
 function JobInfo() {
   const location = useLocation();
   const { state } = location;
@@ -21,6 +23,7 @@ function JobInfo() {
   if (!job) {
     return <Navigate to={"/user/home"} replace />;
   }
+  if (!isAuth() || !isUser()) return <Navigate to={"/user/login"} replace />;
   return (
     <div>
       {console.log(job)}

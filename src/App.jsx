@@ -37,7 +37,7 @@ const App = () => (
       </Route>
 
       <Route path="user">
-        <Route path="" element={<Navigate to="login" replace />} />
+        <Route path="" element={<Navigate to="home" replace />} />
         <Route path="login" element={<UserLogin />} />
         <Route path="register" element={<UserRegister />} />
         <Route path="forgetpass" element={<UserForgetPassword />} />
@@ -49,7 +49,7 @@ const App = () => (
       </Route>
 
       <Route path="company">
-        <Route path="" element={<Navigate to="login" replace />} />
+        <Route path="" element={<Navigate to="home" replace />} />
         <Route path="login" element={<CompanyLogin />} />
         <Route path="register" element={<CompanyRegister />} />
         <Route path="forgetpass" element={<CompanyForgetPassword />} />

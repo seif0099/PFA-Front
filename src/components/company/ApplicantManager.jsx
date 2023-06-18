@@ -5,6 +5,8 @@ import Footer from "../shared/Footer";
 import { getUserToCompany } from "../../services/company/GetUsersToCompany";
 import { accept, refuse } from "../../services/company/manageAcceptation";
 import { getUserById } from "../../services/user/getUsers";
+import { isCompany } from "../../services/company/IsCompany";
+import { isAuth } from "../../services/shared/isAuth";
 function ApplicantManager() {
   const [accepted, setAccepted] = useState(null);
   const navigate = useNavigate();
@@ -45,6 +47,8 @@ function ApplicantManager() {
       .catch((err) => console.log(err));
   }, [accepted]);
 
+  if (!isAuth() || !isCompany())
+    return <Navigate to={"/company/login"} replace />;
   return (
     <div>
       <CompanyNavbar />
@@ -91,7 +95,7 @@ function ApplicantManager() {
                     <div className="mng-company">
                       <div className="col-md-2 col-sm-1">
                         <img
-                        onClick={() => handleClick(data.user)}
+                          onClick={() => handleClick(data.user)}
                           src={data.image}
                           className="img-responsive"
                           alt="image"

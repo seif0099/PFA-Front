@@ -2,6 +2,8 @@ import React, { useRef, useState } from "react";
 import { Link, Navigate, useLocation } from "react-router-dom";
 import CompanyNavbar from "./CompanyNavbar";
 import Footer from "../shared/Footer";
+import { isCompany } from "../../services/company/IsCompany";
+import { isAuth } from "../../services/shared/isAuth";
 const UserInfo = () => {
   const location = useLocation();
   const { state } = location;
@@ -10,6 +12,8 @@ const UserInfo = () => {
   if (!user) {
     return <Navigate to={"/company/applicant"} replace />;
   }
+  if (!isAuth() || !isCompany())
+    return <Navigate to={"/company/login"} replace />;
   return (
     <div>
       <CompanyNavbar />

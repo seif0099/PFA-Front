@@ -1,11 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
-import { isUser } from "../../services/user/IsUser";
-import { isAuth } from "../../services/shared/isAuth";
 import { Navigate } from "react-router";
 import { useNavigate } from "react-router-dom";
 import { companyUpdate } from "../../services/company/updateCompany";
 import { getCompanyInfo } from "../../services/company/getCompanyInfo";
 import { isCompany } from "../../services/company/IsCompany";
+import { isAuth } from "../../services/shared/isAuth";
 import CompanyNavbar from "./CompanyNavbar";
 
 function CompanyProfile() {
@@ -62,6 +61,8 @@ function CompanyProfile() {
       });
   };
 
+  if (!isAuth() || !isCompany())
+    return <Navigate to={"/company/login"} replace />;
   return (
     <div>
       <CompanyNavbar />
