@@ -14,8 +14,8 @@ function HomeNavbar() {
     currentLocation3.pathname !== "/user/editprofile";
 
   const currentLocation2 = useLocation();
-  const shouldDisplayApplicantButton =
-    currentLocation2.pathname !== "/company/applicant";
+  const shouldDisplayHistoryButton =
+    currentLocation2.pathname !== "/user/applyHistory";
   return (
     <div>
       <nav className="navbar navbar-default navbar-fixed navbar-transparent white bootsnav">
@@ -73,6 +73,20 @@ function HomeNavbar() {
                   </Link>
                 </li>
               )}
+
+              {shouldDisplayHistoryButton && (
+                <li>
+                  <Link
+                    to={"/user/applyHistory"}
+                    style={{ right: "-138vh", top: "-6vh", color: "white" }}
+                    className="signin"
+                  >
+                    <i className="bi bi-briefcase-fill"></i>
+                    History
+                  </Link>
+                </li>
+              )}
+
               {shouldDisplayHomeButton && (
                 <li>
                   <Link

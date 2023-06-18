@@ -63,39 +63,39 @@ function Footer() {
           </div>
           <div className="col-md-3 col-sm-4">
             <div className="footer-widget">
-              <h3 className="widgettitle widget-title">All Navigation</h3>
+              <h3 className="widgettitle widget-title">User Navigation</h3>
 
               <div className="textwidget">
                 <div className="textwidget">
                   <ul className="footer-navigation">
                     <li>
-                      <a href="manage-company.html" title="">
-                        Front-end Design
+                      <a href="#" title="">
+                        User Home
                       </a>
                     </li>
                     <li>
-                      <a href="manage-company.html" title="">
-                        Android Developer
+                      <a href="#" title="">
+                        User History
                       </a>
                     </li>
                     <li>
-                      <a href="manage-company.html" title="">
-                        CMS Development
+                      <a href="#" title="">
+                        User Application
                       </a>
                     </li>
                     <li>
-                      <a href="manage-company.html" title="">
-                        PHP Development
+                      <a href="#" title="">
+                        User Login
                       </a>
                     </li>
                     <li>
-                      <a href="manage-company.html" title="">
-                        IOS Developer
+                      <a href="#" title="">
+                        User Register
                       </a>
                     </li>
                     <li>
-                      <a href="manage-company.html" title="">
-                        Iphone Developer
+                      <a href="#" title="">
+                        User Forget-Password
                       </a>
                     </li>
                   </ul>
@@ -105,38 +105,38 @@ function Footer() {
           </div>
           <div className="col-md-3 col-sm-4">
             <div className="footer-widget">
-              <h3 className="widgettitle widget-title">All Categories</h3>
+              <h3 className="widgettitle widget-title">Company Navigation</h3>
 
               <div className="textwidget">
                 <ul className="footer-navigation">
                   <li>
                     <a href="manage-company.html" title="">
-                      Front-end Design
+                      Company Home
                     </a>
                   </li>
                   <li>
                     <a href="manage-company.html" title="">
-                      Android Developer
+                      Company Manage-Applicants
                     </a>
                   </li>
                   <li>
                     <a href="manage-company.html" title="">
-                      CMS Development
+                      Company Profile
                     </a>
                   </li>
                   <li>
                     <a href="manage-company.html" title="">
-                      PHP Development
+                      Company Login
                     </a>
                   </li>
                   <li>
                     <a href="manage-company.html" title="">
-                      IOS Developer
+                      Company Register
                     </a>
                   </li>
                   <li>
                     <a href="manage-company.html" title="">
-                      Iphone Developer
+                      Company Forget-Password
                     </a>
                   </li>
                 </ul>
@@ -165,7 +165,7 @@ function Footer() {
                   ></textarea>
                   <button type="submit" className="btn btn-primary">
                     <span>
-                      <Link to="user/login" style={{ color: "white" }}>
+                      <Link to="#" style={{ color: "white" }}>
                         Send
                       </Link>
                     </span>

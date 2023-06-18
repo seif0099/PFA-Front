@@ -16,13 +16,13 @@ import AdminRegister from "./components/admin/AdminRegister";
 import AdminForgetPassword from "./components/admin/AdminForgetPassword";
 import UserResetPass from "./components/user/UserResetPass";
 import MainContainer from "./components/shared/MainContainer";
-import SearchJob from "./components/user/SearchJob";
 import CreateOffer from "./components/offer/CreateOffer";
 import ApplicantManager from "./components/company/ApplicantManager";
 import ManageProfile from "./components/user/ManageProfile";
 import UserInfo from "./components/company/UserInfo";
 import CompanyProfile from "./components/company/CompanyProfile";
 import JobInfo from "./components/user/JobInfo";
+import ApplyHistory from "./components/user/ApplyHistory";
 
 const App = () => (
   <BrowserRouter>
@@ -45,6 +45,7 @@ const App = () => (
         <Route path="resetPass" element={<UserResetPass />} />
         <Route path="editprofile" element={<ManageProfile />} />
         <Route path="jobInfo" element={<JobInfo />} />
+        <Route path="applyHistory" element={<ApplyHistory />} />
       </Route>
 
       <Route path="company">

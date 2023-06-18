@@ -4,7 +4,6 @@ const baseURL = "http://127.0.0.1:8000/api";
 export const companyUpdate = (
   companyName,
   description,
-  password,
   email,
   adresse,
   code,
@@ -15,7 +14,6 @@ export const companyUpdate = (
     const formData = new FormData();
     formData.append("nomEntreprise", companyName);
     formData.append("description", description);
-    formData.append("password", password);
     formData.append("email", email);
     formData.append("adresse", adresse);
     formData.append("codeEntreprise", code);

@@ -51,8 +51,7 @@ function MainContainer() {
                           <p
                             style={{ color: "#fff", fontFamily: "sans-serif" }}
                           >
-                            Create an account or login 
-                            
+                            Create an account or login
                           </p>
                         </div>
                       </div>
@@ -90,8 +89,7 @@ function MainContainer() {
                           <p
                             style={{ color: "#fff", fontFamily: "sans-serif" }}
                           >
-                           Wait for you recruitement & 
-                           Good Luck !!
+                            Wait for you recruitement & Good Luck !!
                           </p>
                         </div>
                       </div>
@@ -188,7 +186,7 @@ function MainContainer() {
                   </div>
                   <div className="brows-job-position">
                     <h3>
-                      <a href="job-detail.html">Web Developer</a>
+                      <a href="#">Web Developer</a>
                     </h3>
 
                     <p>
@@ -230,7 +228,7 @@ function MainContainer() {
                   </div>
                   <div className="brows-job-position">
                     <h3>
-                      <a href="job-detail.html">Web Developer</a>
+                      <a href="#">Web Developer</a>
                     </h3>
 
                     <p>
@@ -273,7 +271,7 @@ function MainContainer() {
                   </div>
                   <div className="brows-job-position">
                     <h3>
-                      <a href="job-detail.html">Web Developer</a>
+                      <a href="#">Web Developer</a>
                     </h3>
 
                     <p>
@@ -315,7 +313,7 @@ function MainContainer() {
                   </div>
                   <div className="brows-job-position">
                     <h3>
-                      <a href="job-detail.html">Web Developer</a>
+                      <a href="#">Web Developer</a>
                     </h3>
 
                     <p>
@@ -357,7 +355,7 @@ function MainContainer() {
                   </div>
                   <div className="brows-job-position">
                     <h3>
-                      <a href="job-detail.html">Web Developer</a>
+                      <a href="#">Web Developer</a>
                     </h3>
 
                     <p>
@@ -400,7 +398,7 @@ function MainContainer() {
                   </div>
                   <div className="brows-job-position">
                     <h3>
-                      <a href="job-detail.html">Web Developer</a>
+                      <a href="#">Web Developer</a>
                     </h3>
 
                     <p>
@@ -442,7 +440,7 @@ function MainContainer() {
                   </div>
                   <div className="brows-job-position">
                     <h3>
-                      <a href="job-detail.html">Web Developer</a>
+                      <a href="#">Web Developer</a>
                     </h3>
 
                     <p>
@@ -484,7 +482,7 @@ function MainContainer() {
                   </div>
                   <div className="brows-job-position">
                     <h3>
-                      <a href="job-detail.html">Web Developer</a>
+                      <a href="#">Web Developer</a>
                     </h3>
 
                     <p>
@@ -536,9 +534,8 @@ function MainContainer() {
             </div>
             <div className="video-part">
               <a
-                href="#"
-                data-toggle="modal"
-                data-target="#my-video"
+                href="http://127.0.0.1:8000/trailer/jobBoard_Trailler.mp4"
+                target="_blank"
                 className="video-btn"
               >
                 <i className="fa fa-play"></i>
@@ -682,16 +679,10 @@ function MainContainer() {
                         <li className="more-skill bg-primary">+3</li>
                       </ul>
                     </div>
-                    <a
-                      href="freelancer-detail.html"
-                      className="btn btn-freelance-two bg-default"
-                    >
+                    <a href="#" className="btn btn-freelance-two bg-default">
                       View Detail
                     </a>
-                    <a
-                      href="freelancer-detail.html"
-                      className="btn btn-freelance-two bg-info"
-                    >
+                    <a href="#" className="btn btn-freelance-two bg-info">
                       View Detail
                     </a>
                   </div>
@@ -735,16 +726,10 @@ function MainContainer() {
                         <li className="more-skill bg-primary">+3</li>
                       </ul>
                     </div>
-                    <a
-                      href="freelancer-detail.html"
-                      className="btn btn-freelance-two bg-default"
-                    >
+                    <a href="#" className="btn btn-freelance-two bg-default">
                       View Detail
                     </a>
-                    <a
-                      href="freelancer-detail.html"
-                      className="btn btn-freelance-two bg-info"
-                    >
+                    <a href="#" className="btn btn-freelance-two bg-info">
                       View Detail
                     </a>
                   </div>
@@ -788,16 +773,10 @@ function MainContainer() {
                         <li className="more-skill bg-primary">+3</li>
                       </ul>
                     </div>
-                    <a
-                      href="freelancer-detail.html"
-                      className="btn btn-freelance-two bg-default"
-                    >
+                    <a href="#" className="btn btn-freelance-two bg-default">
                       View Detail
                     </a>
-                    <a
-                      href="freelancer-detail.html"
-                      className="btn btn-freelance-two bg-info"
-                    >
+                    <a href="#" className="btn btn-freelance-two bg-info">
                       View Detail
                     </a>
                   </div>
@@ -807,7 +786,7 @@ function MainContainer() {
             <div className="row">
               <div className="col-md-12 col-sm-12">
                 <div className="text-center">
-                  <a href="freelancers-2.html" className="btn btn-primary">
+                  <a href="#" className="btn btn-primary">
                     Load More
                   </a>
                 </div>
@@ -833,12 +812,12 @@ function MainContainer() {
                 <div className="tab" role="tabpanel">
                   <ul className="nav nav-tabs" role="tablist">
                     <li role="presentation" className="active">
-                      <a href="#login" role="tab" data-toggle="tab">
+                      <a href="#" role="tab" data-toggle="tab">
                         Sign In
                       </a>
                     </li>
                     <li role="presentation">
-                      <a href="#register" role="tab" data-toggle="tab"></a>
+                      <a href="#" role="tab" data-toggle="tab"></a>
                     </li>
                   </ul>
                   <div className="tab-content" id="myModalLabel2">

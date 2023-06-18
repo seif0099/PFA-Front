@@ -41,9 +41,6 @@ const UserHome = () => {
   const handleSearch = (e) => {
     setSearchQuery(e.target.value);
   };
-  const handleClick = () => {
-    navigate("/user/JobInfo");
-  };
 
   if (!isAuth() || !isUser()) return <Navigate to={"/user/login"} replace />;
 
@@ -81,7 +78,7 @@ const UserHome = () => {
           </form>
         </div>
       </section>
-      <section className="brows-job-category gray-bg">
+      <section className="brows-job-category gray-bg" style={{ width: "120%" }}>
         <div className="container">
           <div className="col-md-9 col-sm-12">
             <div className="full-card">
@@ -131,16 +128,6 @@ const UserHome = () => {
                           <p style={{ fontWeight: "bold" }}>
                             {item.experience} years
                           </p>
-                        </div>
-                      </div>
-                      <div className="col-md-1 col-sm-1">
-                        <div className="mng-company-action">
-                          <a href="#" data-toggle="tooltip" title="Edit">
-                            <i className="fa fa-edit"></i>
-                          </a>
-                          <a href="#" data-toggle="tooltip" title="Delete">
-                            <i className="fa fa-trash-o"></i>
-                          </a>
                         </div>
                       </div>
                     </div>

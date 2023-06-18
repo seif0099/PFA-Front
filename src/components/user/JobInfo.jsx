@@ -1,12 +1,23 @@
 import React, { useEffect, useRef, useState } from "react";
 import HomeNavbar from "./HomeNavbar";
 import Footer from "../shared/Footer";
-import { useLocation, Navigate } from "react-router-dom";
+import { useLocation, Navigate, useNavigate } from "react-router-dom";
+import { apply } from "../../services/offer/ApplyToOffer";
 function JobInfo() {
   const location = useLocation();
   const { state } = location;
   const [job, setJob] = useState(state);
-
+  const navigate = useNavigate();
+  const handleApply = (id) => {
+    apply(id)
+      .then((response) => {
+        navigate("/user/home", {
+          replace: true,
+        });
+        console.log(response);
+      })
+      .catch((err) => console.log(err));
+  };
   if (!job) {
     return <Navigate to={"/user/home"} replace />;
   }
@@ -38,7 +49,6 @@ function JobInfo() {
             <div className="row bottom-mrg">
               <div className="col-md-12 col-sm-12">
                 <div className="advance-detail detail-desc-caption">
-                  <h4>Info</h4>
                   <span className="designation"></span>
                   <div class="edit-pro">
                     <div class="col-md-4 col-sm-6">
@@ -70,7 +80,10 @@ function JobInfo() {
                       />
                     </div>
 
-                    <div class="col-md-4 col-sm-6">
+                    <div
+                      class="col-md-4 col-sm-6"
+                      style={{ marginLeft: "31em" }}
+                    >
                       <label>Adress</label>
                       <input
                         type="text"
@@ -78,6 +91,14 @@ function JobInfo() {
                         value={job.adresse}
                         disabled
                       />
+                    </div>
+                    <div class="col-md-12 col-sm-6">
+                      <button
+                        className="btn btn-success btn-primary small-btn"
+                        onClick={() => handleApply(job.id)}
+                      >
+                        Submit The Offer
+                      </button>
                     </div>
                   </div>
                 </div>

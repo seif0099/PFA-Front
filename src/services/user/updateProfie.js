@@ -4,7 +4,6 @@ const baseURL = "http://127.0.0.1:8000/api";
 export const userUpdate = (
   lastname,
   firstname,
-  password,
   email,
   adresse,
   age,
@@ -15,9 +14,7 @@ export const userUpdate = (
     const formData = new FormData();
     formData.append("nom", lastname);
     formData.append("prenom", firstname);
-    formData.append("password", password);
     formData.append("email", email);
-
     formData.append("adresse", adresse);
     formData.append("age", age);
     formData.append("telephone", telephone);

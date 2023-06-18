@@ -3,24 +3,24 @@ import { getUsers } from "../../services/user/getUsers";
 import { isUser } from "../../services/user/IsUser";
 import { isAuth } from "../../services/shared/isAuth";
 import { Navigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { userUpdate } from "../../services/user/updateProfie";
 import HomeNavbar from "./HomeNavbar";
 
 function ManageProfile() {
   const handleuploadImage = (e) => {
     setImage(e.target.files[0]);
-  
   };
   const [firstName, setFirstName] = useState("");
   const [image, setImage] = useState(null);
 
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [telephone, setTelephone] = useState("");
   const [adresse, setAdresse] = useState("");
   const [age, setAge] = useState("");
   const uploadImg = useRef(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     getUsers()
@@ -30,7 +30,6 @@ function ManageProfile() {
         setEmail(response.email);
         setTelephone(response.telephone);
         setAdresse(response.adresse);
-        setPassword(response.password);
         setImage(response.image);
       })
       .catch((err) => console.log(err));
@@ -40,18 +39,12 @@ function ManageProfile() {
 
   const handleUpdate = (e) => {
     // e.preventDefault();
-    userUpdate(
-      lastName,
-      firstName,
-      password,
-      email,
-      adresse,
-      age,
-      telephone,
-      image
-    )
+    userUpdate(lastName, firstName, email, adresse, age, telephone, image)
       .then((response) => {
         console.log("Profile updated successfully", response);
+        navigate("/user/home", {
+          replace: true,
+        });
       })
       .catch((err) => {
         console.error("Error updating profile", err);
@@ -60,9 +53,8 @@ function ManageProfile() {
 
   return (
     <div>
-      <HomeNavbar/>
+      <HomeNavbar />
       <div className="clearfix"></div>
-      
 
       <section
         className="inner-header-title"
@@ -148,20 +140,6 @@ function ManageProfile() {
                         class="form-control"
                         value={adresse}
                         onChange={(e) => setAdresse(e.target.value)}
-                      />
-                    </div>
-
-                    <div class="col-md-4 col-sm-6">
-                      <label>Old Password</label>
-                      <input type="password" class="form-control" />
-                    </div>
-                    <div class="col-md-4 col-sm-6">
-                      <label>New Password</label>
-                      <input
-                        type="password"
-                        class="form-control"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
                       />
                     </div>
 

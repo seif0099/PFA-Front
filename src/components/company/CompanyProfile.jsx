@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { isUser } from "../../services/user/IsUser";
 import { isAuth } from "../../services/shared/isAuth";
 import { Navigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { companyUpdate } from "../../services/company/updateCompany";
 import { getCompanyInfo } from "../../services/company/getCompanyInfo";
 import { isCompany } from "../../services/company/IsCompany";
@@ -16,11 +17,11 @@ function CompanyProfile() {
 
   const [description, setDesciprtion] = useState("");
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [telephone, setTelephone] = useState("");
   const [adresse, setAdresse] = useState("");
   const [code, setCode] = useState("");
   const uploadImg = useRef(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     getCompanyInfo()
@@ -31,20 +32,19 @@ function CompanyProfile() {
         setEmail(response.email);
         setTelephone(response.telephone);
         setAdresse(response.adresse);
-        setPassword(response.password);
         setImage(response.image);
       })
       .catch((err) => console.log(err));
   }, []);
 
- if (!isAuth() || !isCompany()) return <Navigate to={"/company/login"} replace />;
+  if (!isAuth() || !isCompany())
+    return <Navigate to={"/company/login"} replace />;
 
   const handleUpdate = (e) => {
-     e.preventDefault();
+    e.preventDefault();
     companyUpdate(
       companyName,
       description,
-      password,
       email,
       adresse,
       code,
@@ -53,6 +53,9 @@ function CompanyProfile() {
     )
       .then((response) => {
         console.log("Profile updated successfully", response);
+        navigate("/company/home", {
+          replace: true,
+        });
       })
       .catch((err) => {
         console.error("Error updating profile", err);
@@ -61,7 +64,7 @@ function CompanyProfile() {
 
   return (
     <div>
-        <CompanyNavbar/>
+      <CompanyNavbar />
       <div className="clearfix"></div>
 
       <section
@@ -158,20 +161,6 @@ function CompanyProfile() {
                         class="form-control"
                         value={code}
                         onChange={(e) => setCode(e.target.value)}
-                      />
-                    </div>
-
-                    <div class="col-md-4 col-sm-6">
-                      <label>Old Password</label>
-                      <input type="password" class="form-control" />
-                    </div>
-                    <div class="col-md-4 col-sm-6">
-                      <label>New Password</label>
-                      <input
-                        type="password"
-                        class="form-control"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
                       />
                     </div>
 

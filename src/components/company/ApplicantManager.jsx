@@ -87,10 +87,11 @@ function ApplicantManager() {
               })}
               {dataOffer.map((data, index) => (
                 <>
-                  <article key={index} onClick={() => handleClick(data.user)}>
+                  <article key={index}>
                     <div className="mng-company">
                       <div className="col-md-2 col-sm-1">
                         <img
+                        onClick={() => handleClick(data.user)}
                           src={data.image}
                           className="img-responsive"
                           alt="image"
