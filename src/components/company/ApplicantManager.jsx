@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom";
 import CompanyNavbar from "./CompanyNavbar";
 import Footer from "../shared/Footer";
 import { getUserToCompany } from "../../services/company/GetUsersToCompany";
