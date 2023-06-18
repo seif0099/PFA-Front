@@ -61,7 +61,7 @@ function ManageProfile() {
         style={{ backgroundImage: "url('/assets/img/banner-10.jpg')" }}
       >
         <div className="container">
-          <h1>Employer Profilee</h1>
+          <h1>Employer Profile</h1>
         </div>
       </section>
       <div className="clearfix"></div>
